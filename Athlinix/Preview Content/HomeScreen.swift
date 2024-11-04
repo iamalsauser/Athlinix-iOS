@@ -84,7 +84,7 @@ struct HomeScreen: View {
             // Custom Navigation Bar at the bottom
             VStack {
                 Spacer()
-                CustomNavBar(selectedButton: $selectedButton).padding(.top, 750) // Pass the binding to the custom nav bar
+                /*CustomNavBar(selectedButton: $selectedButton).padding(.top, 750)*/ // Pass the binding to the custom nav bar
             }
         }
         .navigationBarHidden(true) // Hide the default nav bar

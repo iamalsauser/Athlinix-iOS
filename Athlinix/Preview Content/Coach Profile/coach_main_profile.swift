@@ -27,9 +27,9 @@ struct cProfileStat: View {
                 }
                 
                 // Add ProfileNavBar at the bottom
-                ProfileNavBar3()
-                    .frame(width: geometry.size.width, height: 60) // Set the width and height of the navbar
-                    .background(Color.white) // Optional: set background color for the navbar
+//                ProfileNavBar3()
+//                    .frame(width: geometry.size.width, height: 60) // Set the width and height of the navbar
+//                    .background(Color.white) // Optional: set background color for the navbar
             }
             .background(Color(.systemGray6))
             .navigationBarHidden(true)

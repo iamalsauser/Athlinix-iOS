@@ -33,9 +33,9 @@ struct Explore: View {
                 Spacer() // Add spacer to maintain layout balance
                 
                 // ProfileNavBar at the bottom
-                ProfileNavBar()
-                    .frame(width: geometry.size.width, height: 0) // Set the width and height of the navbar
-                    .background(Color.white).padding(.bottom,60)
+//                ProfileNavBar()
+//                    .frame(width: geometry.size.width, height: 0) // Set the width and height of the navbar
+//                    .background(Color.white).padding(.bottom,60)
             }
             .navigationBarHidden(true) // Hide the default navigation bar
             .edgesIgnoringSafeArea(.bottom) // Extend the view to the bottom edge, covering any white space
