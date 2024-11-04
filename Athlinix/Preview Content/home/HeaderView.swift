@@ -2,24 +2,46 @@ import SwiftUI
 
 // HeaderView
 struct HeaderView: View {
+    @State private var showingActionSheet = false
+    @State private var navigateToCreatePost = false
+    @State private var navigateToBasketballMatch = false
+
     var body: some View {
         VStack(spacing: 20) {
             HStack {
                 Text("ATHLENIX")
                     .font(.title2)
                     .fontWeight(.bold)
-                    .foregroundColor(.white).padding(.top,20)
-
+                    .foregroundColor(.white)
+                    .padding(.top, 20)
+                
                 Spacer()
-
-                NavigationLink(destination: CreatePostView()) {
-                                        Image(systemName: "plus")
-                                            .foregroundColor(.white)
-                                    }
+                
+                Button(action: {
+                    showingActionSheet = true
+                }) {
+                    Image(systemName: "plus")
+                        .foregroundColor(.white)
+                }
+                .actionSheet(isPresented: $showingActionSheet) {
+                    ActionSheet(title: Text("Choose an Option"), buttons: [
+                        .default(Text("Create Post")) {
+                            navigateToCreatePost = true
+                        },
+                        .default(Text("Basketball Match Template")) {
+                            navigateToBasketballMatch = true
+                        },
+                        .cancel()
+                    ])
+                }
+                
+                // NavigationLinks for programmatic navigation
+                NavigationLink(destination: CreatePostView(), isActive: $navigateToCreatePost) { EmptyView() }
+                NavigationLink(destination: BasketballMatchTemplate(), isActive: $navigateToBasketballMatch) { EmptyView() }
             }
             .padding(.top, 40) // Adjust padding for status bar overlap
             .padding(.horizontal)
-
+            
             HStack {
                 Image("profile") // Assuming you have an image named "profile"
                     .resizable()
@@ -32,13 +54,16 @@ struct HeaderView: View {
                         .font(.title3)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
-                        .padding(.leading,60).padding()
-
+                        .padding(.leading, 60)
+                        .padding()
+                    
                     HStack {
                         StatViewstat(label: "17.8", description: "PPG")
                         StatViewstat(label: "3.4", description: "BPG")
                         StatViewstat(label: "9", description: "AST")
-                    }.padding(.leading,60).padding(.bottom,10)
+                    }
+                    .padding(.leading, 60)
+                    .padding(.bottom, 10)
                 }
                 
                 Spacer()

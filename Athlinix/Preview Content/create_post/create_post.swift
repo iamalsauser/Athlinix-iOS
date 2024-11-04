@@ -169,12 +169,11 @@ struct TeamScoreView: View {
                 Button(action: { score += 1 }) {
                     Image(systemName: "plus.circle")
                         .font(.title2)
-                }
+                }.navigationBarBackButtonHidden(true)
             }
         }
     }
 }
-
 // Preview
 struct CreatePostView_Previews: PreviewProvider {
     static var previews: some View {
