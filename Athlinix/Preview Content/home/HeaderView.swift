@@ -28,7 +28,7 @@ struct HeaderView: View {
                         .default(Text("Create Post")) {
                             navigateToCreatePost = true
                         },
-                        .default(Text("Basketball Match Template")) {
+                        .default(Text("Add Match")) {
                             navigateToBasketballMatch = true
                         },
                         .cancel()
