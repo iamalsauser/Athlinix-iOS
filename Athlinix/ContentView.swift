@@ -14,7 +14,7 @@ struct LogoScreen: View {
                 Spacer()
                 
                 // Navigation link that triggers after 3 seconds
-                NavigationLink(destination: HomeScreen(selectedButton: $selectedButton), isActive: $navigateToHome) {
+                NavigationLink(destination: CreateAccountScreen(selectedButton: $selectedButton), isActive: $navigateToHome) {
                     EmptyView()
                 }
             }
