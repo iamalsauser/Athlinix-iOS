@@ -47,32 +47,47 @@ struct BasketballMatchTemplate: View {
                         Text("Submit Stats")
                             .frame(maxWidth: .infinity)
                             .padding()
-                            .background(Color(red: 253 / 255, green: 100 / 255, blue: 48 / 255))
+                            .background(Color(red: 0.99, green: 0.39, blue: 0.19)) // Hex color fd6430 in RGB
                             .foregroundColor(.white)
                             .cornerRadius(8)
                     }
+
                 }
                 
-                // Display the stats summary for all submitted stats
                 if !playerStats.isEmpty {
                     Section(header: Text("Your Stats Summary")) {
                         ForEach(playerStats) { stats in
-                            VStack(alignment: .leading) {
+                            VStack(alignment: .leading, spacing: 8) {
                                 Text(stats.name)
                                     .font(.headline)
-                                Text("Match Date: \(formatDate(stats.matchDate))")
-                                Text("Points: \(stats.points)")
-                                Text("Rebounds: \(stats.rebounds)")
-                                Text("Assists: \(stats.assists)")
-                                Text("Steals: \(stats.steals)")
-                                Text("Blocks: \(stats.blocks)")
+                                    .foregroundColor(.primary)
+                                
+                                HStack {
+                                    Image(systemName: "calendar")
+                                    Text("Match Date: \(formatDate(stats.matchDate))")
+                                        .font(.subheadline)
+                                        .foregroundColor(.secondary)
+                                }
+
+                                Divider().padding(.vertical, 4)
+                                
+                                VStack(alignment: .leading, spacing: 4) {
+                                    statRow(title: "Points", value: stats.points)
+                                    statRow(title: "Rebounds", value: stats.rebounds)
+                                    statRow(title: "Assists", value: stats.assists)
+                                    statRow(title: "Steals", value: stats.steals)
+                                    statRow(title: "Blocks", value: stats.blocks)
+                                }
                             }
+                            .padding()
+                            .background(Color(.systemGray6))
+                            .cornerRadius(10)
+                            .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
                             .padding(.vertical, 4)
                         }
                     }
                 }
                 
-                // Button to view all player stats in the console
                 Button(action: viewAllPlayerStats) {
                     Text("View All Player Stats")
                         .frame(maxWidth: .infinity)
@@ -84,6 +99,18 @@ struct BasketballMatchTemplate: View {
             }
             .navigationTitle("Your Match Stats")
             .onAppear(perform: loadPlayerStats) // Load existing stats when view appears
+        }
+    }
+    
+    private func statRow(title: String, value: Int) -> some View {
+        HStack {
+            Text("\(title):")
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+            Spacer()
+            Text("\(value)")
+                .font(.subheadline)
+                .foregroundColor(.primary)
         }
     }
     
@@ -100,12 +127,12 @@ struct BasketballMatchTemplate: View {
     
     private func submitStats() {
         if let stats = createPlayerStats() {
-            playerStats.append(stats) // Append the new stats to the list
-            savePlayerStats(stats) // Save the stats to the JSON file
-            print("Stats submitted and saved: \(stats)") // Debug print
-            resetInputFields() // Reset input fields
+            playerStats.append(stats)
+            savePlayerStats(stats)
+            print("Stats submitted and saved: \(stats)")
+            resetInputFields()
         } else {
-            print("Failed to create PlayerStats") // Debug print if creation fails
+            print("Failed to create PlayerStats")
         }
     }
 
@@ -116,20 +143,20 @@ struct BasketballMatchTemplate: View {
         assists = ""
         steals = ""
         blocks = ""
-        matchDate = Date() // Reset match date to the current date
+        matchDate = Date()
     }
     
     private func savePlayerStats(_ stats: PlayerStats) {
-        var allStats: [PlayerStats] = loadAllPlayerStats() // Load existing stats
-        allStats.append(stats) // Append the new stat
+        var allStats: [PlayerStats] = loadAllPlayerStats()
+        allStats.append(stats)
         
         let encoder = JSONEncoder()
         if let encoded = try? encoder.encode(allStats) {
             if let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
                 let fileURL = documentsDirectory.appendingPathComponent("playerStats.json")
                 do {
-                    try encoded.write(to: fileURL) // Save all stats back to the file
-                    print("Successfully saved player stats to \(fileURL)") // Debug print
+                    try encoded.write(to: fileURL)
+                    print("Successfully saved player stats to \(fileURL)")
                 } catch {
                     print("Error writing player stats to file: \(error)")
                 }
@@ -143,27 +170,24 @@ struct BasketballMatchTemplate: View {
             let fileURL = documentsDirectory.appendingPathComponent("playerStats.json")
             do {
                 let data = try Data(contentsOf: fileURL)
-                let stats = try decoder.decode([PlayerStats].self, from: data) // Load existing stats
+                let stats = try decoder.decode([PlayerStats].self, from: data)
                 return stats
             } catch {
                 print("Error loading player stats from file: \(error)")
             }
         }
-        return [] // Return an empty array if loading fails
+        return []
     }
 
-    // Function to load player stats when the view appears
     private func loadPlayerStats() {
-        playerStats = loadAllPlayerStats() // Load stats and assign to state variable
+        playerStats = loadAllPlayerStats()
     }
     
-    // Function to view all player stats in the console
     private func viewAllPlayerStats() {
         let allStats = loadAllPlayerStats()
-        print("All Player Stats: \(allStats)") // This will print the contents of the JSON file to the console
+        print("All Player Stats: \(allStats)")
     }
     
-    // Format date to a readable string
     private func formatDate(_ date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium

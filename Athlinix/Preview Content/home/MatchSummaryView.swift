@@ -1,6 +1,6 @@
 import SwiftUI
 
-// Color extension for hex support
+// Color extension for hex support (if needed for specific hex colors)
 extension Color {
     init(hex: String) {
         let hex = hex.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -20,8 +20,8 @@ struct MatchSummaryViewFormat1: View {
     var scoreA: Int
     var scoreB: Int
     var date: String
-    var team1Stats: MatchStats  // Ensure this matches the existing MatchStats struct
-    var team2Stats: MatchStats  // Ensure this matches the existing MatchStats struct
+    var team1Stats: MatchStats
+    var team2Stats: MatchStats
 
     var body: some View {
         VStack(spacing: 10) {
@@ -43,12 +43,12 @@ struct MatchSummaryViewFormat1: View {
                     }
                     Text(date)
                         .font(.subheadline)
-                        .foregroundColor(.gray)
+                        .foregroundColor(.secondary)
                 }
                 Spacer()
             }
             .padding()
-            .background(Color("FD6430").opacity(0.1)) // Use this if Color extension is not recognized
+            .background(Color.primary.opacity(0.05)) // Light background for both modes
             .cornerRadius(15)
 
             // Stats for both teams in vertical layout
@@ -59,14 +59,15 @@ struct MatchSummaryViewFormat1: View {
             .padding(.horizontal)
 
             // Additional details
-            NavigationLink(destination: TorapsStatsView()){
+            NavigationLink(destination: TorapsStatsView()) {
                 Text("Match Summary Details")
                     .font(.footnote)
-                    .foregroundColor(.gray)
-                .padding(.top)}
+                    .foregroundColor(.secondary)
+                    .padding(.top)
+            }
         }
         .padding()
-        .background(Color.white)
+        .background(Color(UIColor.systemBackground)) // Adaptable background color
         .cornerRadius(30)
         .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 5)
     }
@@ -75,13 +76,13 @@ struct MatchSummaryViewFormat1: View {
 // Team Stats View
 struct TeamStatsView: View {
     var teamName: String
-    var stats: MatchStats  // Ensure this matches the existing MatchStats struct
+    var stats: MatchStats
 
     var body: some View {
         VStack(alignment: .leading) {
             Text("\(teamName) Stats")
                 .font(.headline)
-                .foregroundColor(.black)
+                .foregroundColor(.primary)
 
             // Use rounded rectangles for stats
             StatItem(title: "Field Goals", value: "\(stats.fieldGoals)")
@@ -89,7 +90,7 @@ struct TeamStatsView: View {
             StatItem(title: "Free Throws", value: "\(stats.freeThrows)")
         }
         .padding()
-        .background(Color.blue.opacity(0.1))
+        .background(Color.primary.opacity(0.05)) // Light background in both modes
         .cornerRadius(10)
         .shadow(radius: 2)
     }
@@ -104,6 +105,7 @@ struct StatItem: View {
         HStack {
             Text(title)
                 .font(.subheadline)
+                .foregroundColor(.primary)
             Spacer()
             Text(value)
                 .font(.subheadline)
@@ -111,7 +113,7 @@ struct StatItem: View {
                 .foregroundColor(.primary)
         }
         .padding(10)
-        .background(Color.white)
+        .background(Color(UIColor.secondarySystemBackground)) // Adaptable for both modes
         .cornerRadius(8)
         .shadow(radius: 1)
     }
