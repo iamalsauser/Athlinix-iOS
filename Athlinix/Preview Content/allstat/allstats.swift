@@ -53,7 +53,7 @@ struct AllStatsViewstat: View {
                     .padding(.bottom)
 
                 // Pie Chart View
-                PieChartViewStat() // Call the Pie Chart here
+                AllStatsWithPieChartView() // Call the Pie Chart here
                     .padding(.bottom).padding(.top)
 
                 Spacer()

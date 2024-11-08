@@ -56,9 +56,9 @@ struct ScoringEfficiencyView: View {
             .padding(.bottom, 10)
         }
         .padding()
-        .background(Color(hex: "FD6430").opacity(0.1)) // Background color with slight transparency
+        .background(Color(hex: "E0E0E0").opacity(0.5)) // Background color with slight transparency
         .cornerRadius(10)
-        .shadow(radius: 5)
+//        .shadow(radius: 5)
     }
 }
 

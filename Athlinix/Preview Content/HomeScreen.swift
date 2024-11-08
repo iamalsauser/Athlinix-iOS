@@ -91,7 +91,7 @@ struct ContentView: View {
                         .padding(.top, 10)
 
                     // Bar Chart View (example)
-                    BarChartView()
+                    EnhancedBarChartView()
                         .padding(.top, 50)
                 }
                 .padding(.horizontal)

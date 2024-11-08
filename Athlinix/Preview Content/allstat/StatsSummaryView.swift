@@ -49,8 +49,8 @@ struct StatsContainerView: View {
         }
         .frame(width: 150, height: 100) // Adjusted height
         .background(Color.white)
-        .cornerRadius(20)
-        .shadow(radius: 5)
+        .cornerRadius(20).opacity(5)
+        .shadow(radius: 1)
     }
 }
 

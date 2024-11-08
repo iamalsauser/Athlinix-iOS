@@ -25,7 +25,7 @@ struct ProfileSliderView: View {
                 .padding(.leading)
             
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 20) {
+                HStack(spacing: 15) {
                     ForEach(profiles.indices, id: \.self) { index in
                         ProfileCardView(profile: $profiles[index])
                     }
@@ -42,34 +42,32 @@ struct ProfileCardView: View {
     @Binding var profile: UserProfile
     
     var body: some View {
-        VStack {
+        VStack(spacing: 8) {
             Image(profile.profileImage)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 100, height: 100)
+                .frame(width: 60, height: 60) // Smaller profile image
                 .clipShape(Circle())
-                .overlay(Circle().stroke(Color.white, lineWidth: 4))
-                .shadow(radius: 0)
+                .overlay(Circle().stroke(Color.white, lineWidth: 2))
+                .shadow(radius: 3)
             
             Text(profile.name)
-                .font(.headline)
-                .padding(.top, 5)
+                .font(.subheadline)
+                .lineLimit(1)
             
             Button(action: {
                 profile.isFollowed.toggle() // Toggle follow state
             }) {
                 Text(profile.isFollowed ? "Following" : "Follow")
-                    .font(.subheadline)
+                    .font(.caption)
                     .foregroundColor(.white)
-                    .padding(.vertical, 5)
-                    .padding(.horizontal, 20)
-                    .background(profile.isFollowed ? Color.green : Color(red: 253/255, green: 100/255, blue: 48/255)) // Replace orange with FD6430
-                    .cornerRadius(20)
-
+                    .padding(.vertical, 4)
+                    .padding(.horizontal, 16)
+                    .background(profile.isFollowed ? Color.green : Color(red: 253/255, green: 100/255, blue: 48/255)) // FD6430 color
+                    .cornerRadius(15)
             }
-            .padding(.top, 5)
         }
-        .frame(width: 120) // Set width for each card
+        .frame(width: 80) // Reduced width for each card
     }
 }
 

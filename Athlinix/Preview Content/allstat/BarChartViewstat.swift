@@ -1,68 +1,72 @@
 import SwiftUI
 import Charts
 
-// Your existing ScoreData1 model
-struct ScoreData1: Identifiable, Codable {
+// ScoreData1 model
+struct ScoreData1: Identifiable {
     var id = UUID()
     var period: String
     var points: Double
 }
 
-// Your existing ScoreDataCollection model
-struct ScoreDataCollection: Codable {
-    var monthly: [ScoreData1]
-    var weekly: [ScoreData1]
-    var annual: [ScoreData1]
-}
+// ScoreDataCollection model with predefined data
+struct ScoreDataCollection {
+    let monthly: [ScoreData1]
+    let weekly: [ScoreData1]
+    let annual: [ScoreData1]
 
-// Your existing DataLoader class
-class DataLoader {
-    static func loadData() -> ScoreDataCollection? {
-        guard let url = Bundle.main.url(forResource: "ScoreData", withExtension: "json") else {
-            print("Data file not found")
-            return nil
-        }
-
-        do {
-            let data = try Data(contentsOf: url)
-            let decoder = JSONDecoder()
-            return try decoder.decode(ScoreDataCollection.self, from: data)
-        } catch {
-            print("Error decoding data: \(error)")
-            return nil
-        }
-    }
+    static let sampleData = ScoreDataCollection(
+        monthly: [
+            ScoreData1(period: "Jan", points: 150),
+            ScoreData1(period: "Feb", points: 170),
+            ScoreData1(period: "Mar", points: 120),
+            ScoreData1(period: "Apr", points: 200),
+            ScoreData1(period: "May", points: 180),
+            ScoreData1(period: "Jun", points: 220),
+            ScoreData1(period: "Jul", points: 195),
+            ScoreData1(period: "Aug", points: 170),
+            ScoreData1(period: "Sep", points: 210),
+            ScoreData1(period: "Oct", points: 230),
+            ScoreData1(period: "Nov", points: 190),
+            ScoreData1(period: "Dec", points: 250)
+        ],
+        weekly: [
+            ScoreData1(period: "Week 1", points: 50),
+            ScoreData1(period: "Week 2", points: 70),
+            ScoreData1(period: "Week 3", points: 100),
+            ScoreData1(period: "Week 4", points: 80)
+        ],
+        annual: [
+            ScoreData1(period: "2021", points: 1800),
+            ScoreData1(period: "2022", points: 2100),
+            ScoreData1(period: "2023", points: 2000)
+        ]
+    )
 }
 
 // BarChartViewstat
 struct BarChartViewstat: View {
     @Binding var selectedOption: String
-    @State private var scoreData: ScoreDataCollection?
+    private let scoreData = ScoreDataCollection.sampleData // Directly access sample data
 
     var body: some View {
         let data: [ScoreData1]
         let yAxisRange: ClosedRange<Double>
         let yAxisStride: Double
 
-        // Load the data
-        if scoreData == nil {
-            scoreData = DataLoader.loadData()
-        }
-
         // Choose data based on the selected option and set Y-axis range
         switch selectedOption {
         case "Monthly":
-            data = scoreData?.monthly ?? []
+            data = scoreData.monthly
             yAxisRange = 0...250
             yAxisStride = 50
         case "Weekly":
-            data = scoreData?.weekly ?? []
+            data = scoreData.weekly
             yAxisRange = 0...100
             yAxisStride = 20
         case "Annual":
-            data = scoreData?.annual ?? []
-            yAxisRange = 0...5000
-            yAxisStride = 1000
+            data = scoreData.annual
+            yAxisRange = 0...2500
+            yAxisStride = 500
         default:
             data = []
             yAxisRange = 0...250
