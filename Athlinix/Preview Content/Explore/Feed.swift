@@ -7,10 +7,10 @@ struct InstagramFeedView: View {
 
     let posts: [Post] = [
         Post(user: User(name: "Lebron James", profileImage: "person.circle.fill"), images: ["feed1", "feed3"], likes: 120, caption: "Just scored the game-winning shot!", teamLogo: "lakers"),
-        Post(user: User(name: "Luka Doncic", profileImage: "person.circle.fill"), images: ["feed2", "feed4", "feed5"], likes: 85, caption: "Had an amazing game under the sun!", teamLogo: "spurs1"),
-        Post(user: User(name: "James Harden", profileImage: "person.circle.fill"), images: ["feed7", "feed6"], likes: 200, caption: "Exploring new plays with my teammates.", teamLogo: "pistons"),
-        Post(user: User(name: "mary_queen", profileImage: "person.circle.fill"), images: ["profile3"], likes: 64, caption: "Enjoying a victory celebration!", teamLogo: "warriors"),
-        Post(user: User(name: "Jayson Tatum", profileImage: "person.circle.fill"), images: ["feed3"], likes: 64, caption: "Practicing my free throws at the court.", teamLogo: "toronto"),
+        Post(user: User(name: "Roshan Singh", profileImage: "person.circle.fill"), images: ["feed2", "feed4", "feed5"], likes: 85, caption: "Had an amazing game under the sun!", teamLogo: "spurs1"),
+        Post(user: User(name: "Dev Karan Singh", profileImage: "person.circle.fill"), images: ["feed7", "feed6"], likes: 200, caption: "Exploring new plays with my teammates.", teamLogo: "pistons"),
+        Post(user: User(name: "Nand Merja", profileImage: "person.circle.fill"), images: ["profile3"], likes: 64, caption: "Enjoying a victory celebration!", teamLogo: "warriors"),
+        Post(user: User(name: "Parth Sinh", profileImage: "person.circle.fill"), images: ["feed3"], likes: 64, caption: "Practicing my free throws at the court.", teamLogo: "toronto"),
     ]
 
     var body: some View {
