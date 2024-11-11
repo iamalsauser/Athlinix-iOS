@@ -9,7 +9,7 @@ struct PlayerStats: Identifiable, Codable {
     var assists: Int
     var steals: Int
     var blocks: Int
-    var matchDate: Date // Added to store the match date and time
+    var matchDate: Date
 }
 
 struct BasketballMatchTemplate: View {
@@ -32,26 +32,20 @@ struct BasketballMatchTemplate: View {
                 }
                 
                 Section(header: Text("Enter Your Stats")) {
-                    TextField("Points", text: $points)
-                        .keyboardType(.numberPad)
-                    TextField("Rebounds", text: $rebounds)
-                        .keyboardType(.numberPad)
-                    TextField("Assists", text: $assists)
-                        .keyboardType(.numberPad)
-                    TextField("Steals", text: $steals)
-                        .keyboardType(.numberPad)
-                    TextField("Blocks", text: $blocks)
-                        .keyboardType(.numberPad)
+                    TextField("Points", text: $points).keyboardType(.numberPad)
+                    TextField("Rebounds", text: $rebounds).keyboardType(.numberPad)
+                    TextField("Assists", text: $assists).keyboardType(.numberPad)
+                    TextField("Steals", text: $steals).keyboardType(.numberPad)
+                    TextField("Blocks", text: $blocks).keyboardType(.numberPad)
                     
                     Button(action: submitStats) {
                         Text("Submit Stats")
                             .frame(maxWidth: .infinity)
                             .padding()
-                            .background(Color(red: 0.99, green: 0.39, blue: 0.19)) // Hex color fd6430 in RGB
+                            .background(Color(red: 0.99, green: 0.39, blue: 0.19))
                             .foregroundColor(.white)
                             .cornerRadius(8)
                     }
-
                 }
                 
                 if !playerStats.isEmpty {
@@ -60,7 +54,6 @@ struct BasketballMatchTemplate: View {
                             VStack(alignment: .leading, spacing: 8) {
                                 Text(stats.name)
                                     .font(.headline)
-                                    .foregroundColor(.primary)
                                 
                                 HStack {
                                     Image(systemName: "calendar")
@@ -68,7 +61,6 @@ struct BasketballMatchTemplate: View {
                                         .font(.subheadline)
                                         .foregroundColor(.secondary)
                                 }
-
                                 Divider().padding(.vertical, 4)
                                 
                                 VStack(alignment: .leading, spacing: 4) {
@@ -98,19 +90,15 @@ struct BasketballMatchTemplate: View {
                 }
             }
             .navigationTitle("Your Match Stats")
-            .onAppear(perform: loadPlayerStats) // Load existing stats when view appears
+            .onAppear(perform: loadPlayerStats)
         }
     }
     
     private func statRow(title: String, value: Int) -> some View {
         HStack {
-            Text("\(title):")
-                .font(.subheadline)
-                .foregroundColor(.secondary)
+            Text("\(title):").foregroundColor(.secondary)
             Spacer()
-            Text("\(value)")
-                .font(.subheadline)
-                .foregroundColor(.primary)
+            Text("\(value)").foregroundColor(.primary)
         }
     }
     
@@ -122,14 +110,13 @@ struct BasketballMatchTemplate: View {
               let blocks = Int(blocks),
               !playerName.isEmpty else { return nil }
         
-        return PlayerStats(name: playerName, points: points, rebounds: rebounds, assists: assists, steals: steals, blocks: blocks, matchDate: matchDate) // Save the match date
+        return PlayerStats(name: playerName, points: points, rebounds: rebounds, assists: assists, steals: steals, blocks: blocks, matchDate: matchDate)
     }
     
     private func submitStats() {
         if let stats = createPlayerStats() {
             playerStats.append(stats)
             savePlayerStats(stats)
-            print("Stats submitted and saved: \(stats)")
             resetInputFields()
         } else {
             print("Failed to create PlayerStats")
@@ -147,16 +134,17 @@ struct BasketballMatchTemplate: View {
     }
     
     private func savePlayerStats(_ stats: PlayerStats) {
-        var allStats: [PlayerStats] = loadAllPlayerStats()
+        var allStats = loadAllPlayerStats()
         allStats.append(stats)
         
         let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
         if let encoded = try? encoder.encode(allStats) {
             if let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
                 let fileURL = documentsDirectory.appendingPathComponent("playerStats.json")
                 do {
                     try encoded.write(to: fileURL)
-                    print("Successfully saved player stats to \(fileURL)")
+                    print("Saved player stats to \(fileURL)")
                 } catch {
                     print("Error writing player stats to file: \(error)")
                 }
