@@ -3,14 +3,14 @@ import SwiftUI
 struct ProfileInfoView1: View {
     var body: some View {
         VStack {
-            // Profile Image and Name with Verified Tick
+            
             HStack(spacing: 5) {
                 Text("Lebron James")
                     .font(.title)
                     .bold()
                     .padding(.leading)
 
-                // Verified tick image
+                
                 Image(systemName: "checkmark.seal.fill")
                     .resizable()
                     .frame(width: 20, height: 20)
@@ -18,11 +18,11 @@ struct ProfileInfoView1: View {
             }
             
 
-            // Role and experience
+            
             Text("Player - 10yrs exp.")
                 .foregroundColor(.gray)
             
-            // Bio text
+            
             Text("Basketball player with a passion for the game, always hustling and chasing... More")
                 .font(.subheadline)
                 .foregroundColor(.gray)

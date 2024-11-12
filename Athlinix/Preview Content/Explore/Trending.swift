@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct TeamSliderView: View {
-    // Example team data
+    
     let teams: [Team] = [
         Team(name: "Lakers", winPercentage: 85.0, logo: "sportscourt.fill"),
         Team(name: "Warriors", winPercentage: 82.5, logo: "sportscourt.fill"),
@@ -18,12 +18,12 @@ struct TeamSliderView: View {
                 .foregroundColor(.primary)
                 .padding(.vertical, 10)
             
-            // Horizontal Scroll View
+            
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 20) {
                     ForEach(teams, id: \.name) { team in
                         VStack {
-                            // Circular progress view for win percentage
+                            
                             ZStack {
                                 Circle()
                                     .stroke(lineWidth: 6)
@@ -37,7 +37,7 @@ struct TeamSliderView: View {
                                     .rotationEffect(Angle(degrees: 270))
                                     .animation(.linear, value: team.winPercentage)
                                 
-                                // Team logo in the center of the progress view
+                                
                                 Image(systemName: team.logo)
                                     .resizable()
                                     .frame(width: 30, height: 30)
@@ -45,13 +45,13 @@ struct TeamSliderView: View {
                             }
                             .frame(width: 50, height: 50)
                             
-                            // Team name and win percentage below the progress view
+                            
                             VStack(alignment: .center, spacing: 2) {
                                 Text(team.name)
                                     .font(.headline)
                                     .fontWeight(.bold)
                                 
-                                // Percentage label
+                               
                                 Text("\(Int(team.winPercentage))%")
                                     .font(.caption)
                                     .padding(4)
@@ -61,18 +61,18 @@ struct TeamSliderView: View {
                             }
                         }
                         .padding(.horizontal)
-                        .frame(width: 80) // Fixed width for each team
+                        .frame(width: 80)
                     }
                 }
                 .padding(.horizontal)
             }
         }
         .padding()
-        .background(Color(UIColor.systemGroupedBackground).ignoresSafeArea()) // iOS native background
+        .background(Color(UIColor.systemGroupedBackground).ignoresSafeArea())
     }
 }
 
-// Model for Team data
+
 struct Team {
     let name: String
     let winPercentage: Double

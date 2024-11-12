@@ -1,6 +1,5 @@
 import SwiftUI
 
-// Color extension for hex support (if needed for specific hex colors)
 extension Color {
     init(hex: String) {
         let hex = hex.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -13,7 +12,6 @@ extension Color {
     }
 }
 
-// Match Summary View (Format 1)
 struct MatchSummaryViewFormat1: View {
     var teamA: String
     var teamB: String
@@ -25,7 +23,6 @@ struct MatchSummaryViewFormat1: View {
 
     var body: some View {
         VStack(spacing: 10) {
-            // Match Teams and Scores
             HStack {
                 VStack(alignment: .leading) {
                     Text("\(teamA) vs \(teamB)")
@@ -48,17 +45,15 @@ struct MatchSummaryViewFormat1: View {
                 Spacer()
             }
             .padding()
-            .background(Color.primary.opacity(0.05)) // Light background for both modes
+            .background(Color.primary.opacity(0.05))
             .cornerRadius(15)
 
-            // Stats for both teams in vertical layout
             VStack(spacing: 20) {
                 TeamStatsView(teamName: teamA, stats: team1Stats)
                 TeamStatsView(teamName: teamB, stats: team2Stats)
             }
             .padding(.horizontal)
 
-            // Additional details
             NavigationLink(destination: TorapsStatsView()) {
                 Text("Match Summary Details")
                     .font(.footnote)
@@ -67,13 +62,12 @@ struct MatchSummaryViewFormat1: View {
             }
         }
         .padding()
-        .background(Color(UIColor.systemBackground)) // Adaptable background color
+        .background(Color(UIColor.systemBackground))
         .cornerRadius(30)
         .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 5)
     }
 }
 
-// Team Stats View
 struct TeamStatsView: View {
     var teamName: String
     var stats: MatchStats
@@ -84,19 +78,17 @@ struct TeamStatsView: View {
                 .font(.headline)
                 .foregroundColor(.primary)
 
-            // Use rounded rectangles for stats
             StatItem(title: "Field Goals", value: "\(stats.fieldGoals)")
             StatItem(title: "3-Point Field Goals", value: "\(stats.threePFieldGoals)")
             StatItem(title: "Free Throws", value: "\(stats.freeThrows)")
         }
         .padding()
-        .background(Color.primary.opacity(0.05)) // Light background in both modes
+        .background(Color.primary.opacity(0.05))
         .cornerRadius(10)
         .shadow(radius: 2)
     }
 }
 
-// Stat Item View
 struct StatItem: View {
     var title: String
     var value: String
@@ -113,13 +105,12 @@ struct StatItem: View {
                 .foregroundColor(.primary)
         }
         .padding(10)
-        .background(Color(UIColor.secondarySystemBackground)) // Adaptable for both modes
+        .background(Color(UIColor.secondarySystemBackground))
         .cornerRadius(8)
         .shadow(radius: 1)
     }
 }
 
-// Preview for Format 1
 struct MatchSummaryViewFormat1_Previews: PreviewProvider {
     static var previews: some View {
         MatchSummaryViewFormat1(

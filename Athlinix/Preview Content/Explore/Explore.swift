@@ -1,16 +1,13 @@
 import SwiftUI
 
 struct Explore: View {
-    @Binding var selectedButton: String // Use binding to track the selected state
-    @State private var searchText: String = "" // State variable for the search text
+    @Binding var selectedButton: String
+    @State private var searchText: String = ""
     
     var body: some View {
         GeometryReader { geometry in
-            VStack(spacing: 0) { // Ensure no spacing between content and navigation bar
-                
-                // Custom Navigation Bar with Search Bar
+            VStack(spacing: 0) {
                 HStack {
-                    // Search bar with magnifying glass icon
                     HStack {
                         Image(systemName: "magnifyingglass")
                             .foregroundColor(.gray)
@@ -25,26 +22,20 @@ struct Explore: View {
                     
                     Spacer()
                 }
-                .padding(.top) // Add padding to the top if needed for spacing
+                .padding(.top)
                 
-                // Content of Explore Page
-                InstagramFeedView() // Feed view integrated
+                InstagramFeedView()
                 
-                Spacer() // Add spacer to maintain layout balance
-                
-                // ProfileNavBar at the bottom
-//                ProfileNavBar()
-//                    .frame(width: geometry.size.width, height: 0) // Set the width and height of the navbar
-//                    .background(Color.white).padding(.bottom,60)
+                Spacer()
             }
-            .navigationBarHidden(true) // Hide the default navigation bar
-            .edgesIgnoringSafeArea(.bottom) // Extend the view to the bottom edge, covering any white space
+            .navigationBarHidden(true)
+            .edgesIgnoringSafeArea(.bottom)
         }
     }
 }
 
 struct Explore_Previews: PreviewProvider {
     static var previews: some View {
-        Explore(selectedButton: .constant("explore")) // Provide a default binding for previews
+        Explore(selectedButton: .constant("explore"))
     }
 }

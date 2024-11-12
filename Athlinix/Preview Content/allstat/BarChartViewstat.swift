@@ -1,14 +1,12 @@
 import SwiftUI
 import Charts
 
-// ScoreData1 model
 struct ScoreData1: Identifiable {
     var id = UUID()
     var period: String
     var points: Double
 }
 
-// ScoreDataCollection model with predefined data
 struct ScoreDataCollection {
     let monthly: [ScoreData1]
     let weekly: [ScoreData1]
@@ -43,17 +41,15 @@ struct ScoreDataCollection {
     )
 }
 
-// BarChartViewstat
 struct BarChartViewstat: View {
     @Binding var selectedOption: String
-    private let scoreData = ScoreDataCollection.sampleData // Directly access sample data
+    private let scoreData = ScoreDataCollection.sampleData
 
     var body: some View {
         let data: [ScoreData1]
         let yAxisRange: ClosedRange<Double>
         let yAxisStride: Double
 
-        // Choose data based on the selected option and set Y-axis range
         switch selectedOption {
         case "Monthly":
             data = scoreData.monthly
@@ -73,13 +69,12 @@ struct BarChartViewstat: View {
             yAxisStride = 50
         }
 
-        // Bar Chart
         return Chart(data) { item in
             BarMark(
                 x: .value("Period", item.period),
                 y: .value("Points", item.points)
             )
-            .foregroundStyle(Color(red: 253/255, green: 100/255, blue: 48/255)) // Custom color
+            .foregroundStyle(Color(red: 253/255, green: 100/255, blue: 48/255))
         }
         .chartYAxis {
             AxisMarks(values: .stride(by: yAxisStride))
@@ -92,9 +87,8 @@ struct BarChartViewstat: View {
     }
 }
 
-// Preview Provider
 struct BarChartViewstat_Previews: PreviewProvider {
-    @State static var selectedOption = "Monthly" // Set default value for preview
+    @State static var selectedOption = "Monthly"
 
     static var previews: some View {
         BarChartViewstat(selectedOption: $selectedOption)

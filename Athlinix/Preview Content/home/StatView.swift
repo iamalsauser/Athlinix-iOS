@@ -1,7 +1,7 @@
 import SwiftUI
 import Charts
 
-// Sample Data for the Line Chart
+
 struct ChartData: Identifiable {
     var id = UUID()
     var month: String
@@ -23,7 +23,7 @@ let sampleData = [
     ChartData(month: "Dec", points: 250)
 ]
 
-// StatView for displaying Month and Points
+
 struct StatView: View {
     var month: String
     var points: Double
@@ -33,7 +33,7 @@ struct StatView: View {
             Text(month)
                 .font(.headline)
                 .foregroundColor(.white)
-            Text("\(points, specifier: "%.1f")") // Display points with one decimal
+            Text("\(points, specifier: "%.1f")")
                 .font(.subheadline)
                 .foregroundColor(.white.opacity(0.7))
         }
@@ -41,7 +41,7 @@ struct StatView: View {
     }
 }
 
-// Line Chart View
+
 struct LineChartView: View {
     var body: some View {
         Chart(sampleData) { data in
@@ -49,18 +49,18 @@ struct LineChartView: View {
                 x: .value("Month", data.month),
                 y: .value("Points", data.points)
             )
-            .foregroundStyle(Color(red: 253/255, green: 100/255, blue: 48/255)) // FD6430 color
+            .foregroundStyle(Color(red: 253/255, green: 100/255, blue: 48/255))
         }
         .chartYAxis {
-            AxisMarks(values: .stride(by: 50)) // Y-Axis with 50 units stride
+            AxisMarks(values: .stride(by: 50))
         }
         .chartXAxis {
-            AxisMarks(values: .automatic) // Automatically handle month values
+            AxisMarks(values: .automatic)
         }
     }
 }
 
-// Preview for StatView
+
 struct StatView_Previews: PreviewProvider {
     static var previews: some View {
         StatView(month: "Jan", points: 150)

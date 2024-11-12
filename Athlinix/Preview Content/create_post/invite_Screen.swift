@@ -1,6 +1,5 @@
 import SwiftUI
 
-// MARK: - Models
 struct InviteMember: Identifiable {
     let id: Int
     let name: String
@@ -17,13 +16,11 @@ struct Member: Identifiable {
     let imageName: String
 }
 
-// MARK: - Main View
 struct InviteView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var searchText = ""
-    @Binding var selectedMembers: [InviteMember] // Changed from Member to InviteMember
+    @Binding var selectedMembers: [InviteMember]
     
-    // Sample data - Replace with your actual data source
     let members: [InviteMember] = [
         InviteMember(id: 1, name: "Vivek ", username: "@moonsight_19", role: "Coach", imageName: "profile"),
         InviteMember(id: 2, name: "Abhinav", username: "@abhinav", role: "Coach", imageName: "profile1"),
@@ -46,14 +43,12 @@ struct InviteView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                // Search Bar
                 SearchBar(text: $searchText)
                     .padding()
                 
-                // Members List
                 List {
                     ForEach(filteredMembers) { member in
-                        MemberRow(member: member, selectedMembers: $selectedMembers) // Pass selectedMembers binding
+                        MemberRow(member: member, selectedMembers: $selectedMembers)
                     }
                 }
                 .listStyle(PlainListStyle())
@@ -72,7 +67,6 @@ struct InviteView: View {
     }
 }
 
-// MARK: - Supporting Views
 struct SearchBar: View {
     @Binding var text: String
     
@@ -105,27 +99,25 @@ struct SearchBar: View {
 
 struct MemberRow: View {
     let member: InviteMember
-    @Binding var selectedMembers: [InviteMember] // Binding to update selected members
+    @Binding var selectedMembers: [InviteMember]
     @State private var isSelected = false
     
     var body: some View {
         Button(action: {
             isSelected.toggle()
             if isSelected {
-                selectedMembers.append(member) // Add member to selection
+                selectedMembers.append(member)
             } else {
-                selectedMembers.removeAll { $0.id == member.id } // Remove member from selection
+                selectedMembers.removeAll { $0.id == member.id }
             }
         }) {
             HStack(spacing: 12) {
-                // Profile Image
                 Image(member.imageName)
                     .resizable()
                     .scaledToFill()
                     .frame(width: 40, height: 40)
                     .clipShape(Circle())
                 
-                // Member Info
                 VStack(alignment: .leading, spacing: 4) {
                     Text(member.name)
                         .font(.body)
@@ -138,7 +130,6 @@ struct MemberRow: View {
                 
                 Spacer()
                 
-                // Role Label
                 Text(member.role)
                     .font(.subheadline)
                     .foregroundColor(.gray)
@@ -151,14 +142,12 @@ struct MemberRow: View {
     }
 }
 
-// MARK: - Preview
 struct InviteView_Previews: PreviewProvider {
     static var previews: some View {
         InviteView(selectedMembers: .constant([]))
     }
 }
 
-// MARK: - Custom View Modifiers
 struct ListSeparatorHidden: ViewModifier {
     func body(content: Content) -> some View {
         if #available(iOS 15.0, *) {

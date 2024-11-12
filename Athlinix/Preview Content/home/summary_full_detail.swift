@@ -3,7 +3,7 @@ import SwiftUI
 struct TorapsStatsView: View {
     var body: some View {
         VStack {
-            // Top Bar
+            
             HStack {
                 Image(systemName: "chevron.left")
                     .padding()
@@ -14,11 +14,11 @@ struct TorapsStatsView: View {
             }
             .padding(.top, 20)
             
-            // Score Header with 16-point padding
+            
             HStack {
                 VStack {
                     
-                        Image("lakers") // 76ers team logo
+                        Image("lakers")
                             .resizable()
                             .scaledToFit()
                         .frame(width: 60, height: 60)
@@ -40,37 +40,37 @@ struct TorapsStatsView: View {
                 Spacer()
                 
                 VStack {
-                    Image("bulls") // Raptors team logo
+                    Image("bulls")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 60, height: 60)
                     Text("Bulls")
                         .font(.caption)
-                        .foregroundColor(Color(hex: "#FF5116")) // Set color to orange
+                        .foregroundColor(Color(hex: "#FF5116"))
                 }
             }
-            .padding(.horizontal, 16) // Add horizontal padding of 16 points
+            .padding(.horizontal, 16)
             .padding(.vertical)
             
-            // Tabs with equal width spacing
+            
             HStack {
                 VStack {
                     Text("76ers")
                         .font(.subheadline)
-                        .foregroundColor(.gray) // Set color to gray for 76ers
+                        .foregroundColor(.gray)
                 }
-                .frame(maxWidth: .infinity) // Take up 1/3 of the space
+                .frame(maxWidth: .infinity)
                 
                 VStack {
                     Text("toraps")
                         .font(.subheadline)
-                        .foregroundColor(Color(hex: "#FF5116")) // Set color to orange
+                        .foregroundColor(Color(hex: "#FF5116"))
                     Rectangle()
-                        .fill(Color(hex: "#FF5116")) // Underline with custom color
-                        .frame(width: 120, height: 2) // Underline with 120pt width and 2pt height
-                        .offset(y: -4) // Slightly move the line up if needed for visual alignment
+                        .fill(Color(hex: "#FF5116"))
+                        .frame(width: 120, height: 2)
+                        .offset(y: -4)
                 }
-                .frame(maxWidth: .infinity) // Take up 1/3 of the space
+                .frame(maxWidth: .infinity)
                 
                 VStack {
                     NavigationLink(destination: eStatsView()) {
@@ -80,33 +80,33 @@ struct TorapsStatsView: View {
                                     }
 
                 }
-                .frame(maxWidth: .infinity) // Take up 1/3 of the space
+                .frame(maxWidth: .infinity)
             }
             .padding(.horizontal)
             
-            // Table Headers
+            
             HStack {
                 Text("Player")
-                    .font(.system(size: 14, weight: .semibold)) // Semibold font size 14
+                    .font(.system(size: 14, weight: .semibold))
                     .foregroundColor(.gray)
                 Spacer()
                 Text("reb")
-                    .font(.system(size: 14, weight: .semibold)) // Semibold font size 14
+                    .font(.system(size: 14, weight: .semibold))
                     .foregroundColor(.gray)
                 Text("ast")
-                    .font(.system(size: 14, weight: .semibold)) // Semibold font size 14
+                    .font(.system(size: 14, weight: .semibold))
                     .foregroundColor(.gray)
                 Text("foul")
-                    .font(.system(size: 14, weight: .semibold)) // Semibold font size 14
+                    .font(.system(size: 14, weight: .semibold))
                     .foregroundColor(.gray)
                 Text("pts ")
-                    .font(.system(size: 14, weight: .semibold)) // Semibold font size 14
+                    .font(.system(size: 14, weight: .semibold))
                     .foregroundColor(.gray)
             }
             .padding(.horizontal)
             .padding(.top, 8)
             
-            // Player Stats List
+            
             List(0..<5) { _ in
                 HStack {
                     Text("John Hart")
@@ -122,7 +122,7 @@ struct TorapsStatsView: View {
     }
 }
 
-// Extension for custom hex color
+
 extension Color {
     init(hexaa: String) {
         let hexaa = hexaa.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
@@ -131,14 +131,14 @@ extension Color {
         
         let a, r, g, b: UInt64
         switch hexaa.count {
-        case 3: // RGB (12-bit)
+        case 3:
             (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
-        case 6: // RGB (24-bit)
+        case 6:
             (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)
-        case 8: // ARGB (32-bit)
+        case 8:
             (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
         default:
-            (a, r, g, b) = (255, 0, 0, 0) // Fallback to black if the format is invalid
+            (a, r, g, b) = (255, 0, 0, 0) 
         }
         
         self.init(

@@ -22,7 +22,7 @@ struct SocialMediaFeedView1: View {
     }
 }
 
-// FeedPostView for displaying each post
+
 struct FeedPostView1: View {
     let feedPost: FeedPost1
     @Binding var favoritePosts: Set<UUID>
@@ -44,7 +44,7 @@ struct FeedPostView1: View {
     }
 }
 
-// AccountProfileView to show account details
+
 struct AccountProfileView1: View {
     let account: Account1
 
@@ -67,7 +67,7 @@ struct AccountProfileView1: View {
     }
 }
 
-// FeedPostImagesView for displaying post images
+
 struct FeedPostImagesView1: View {
     let photos: [String]
 
@@ -96,7 +96,7 @@ struct FeedPostImagesView1: View {
     }
 }
 
-// InteractionSection for like and share actions
+
 struct InteractionSection1: View {
     let feedPost: FeedPost1
     @Binding var favoritePosts: Set<UUID>
@@ -138,7 +138,7 @@ struct InteractionSection1: View {
     }
 }
 
-// MessageView to show the post message
+
 struct MessageView1: View {
     let feedPost: FeedPost1
 
@@ -159,7 +159,7 @@ struct MessageView1: View {
     }
 }
 
-// CommentsSection for handling user comments
+
 struct CommentsSection1: View {
     let feedPost: FeedPost1
     @Binding var userComments: [UUID: String]
@@ -189,14 +189,14 @@ struct CommentsSection1: View {
     }
 }
 
-// Models
+
 struct Account1 {
     let name: String
     let avatarImage: String
 }
 
 struct FeedPost1: Identifiable {
-    let id = UUID() // Unique identifier for each post
+    let id = UUID()
     let author: Account1
     let photos: [String]
     let totalLikes: Int
@@ -204,7 +204,7 @@ struct FeedPost1: Identifiable {
     let logo: String
 }
 
-// Preview
+
 struct SocialMediaFeedView1_Previews: PreviewProvider {
     static var previews: some View {
         SocialMediaFeedView1()

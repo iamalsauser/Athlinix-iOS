@@ -1,6 +1,6 @@
 import SwiftUI
 
-// Define PlayerStats structure for individual player stats
+
 struct PlayerStats: Identifiable, Codable {
     var id = UUID()
     var name: String

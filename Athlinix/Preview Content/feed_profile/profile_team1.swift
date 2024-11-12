@@ -1,57 +1,53 @@
 import SwiftUI
 
 struct TeamsView1_: View {
-    let teams = ["lakers", "cavs", "heat", "warriors"] // Replace with actual team images
+    let teams = ["lakers", "cavs", "heat", "warriors"]
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 20) {
-                // Add Team Button
-                Button(action: {
-                    // Add team action
-                }) {
+                Button(action: {}) {
                     VStack {
                         Image(systemName: "plus.circle.fill")
-                            .font(.title2) // Decreased icon size
+                            .font(.title2)
                             .foregroundColor(.gray)
                         Text("Add Team")
                             .foregroundColor(.gray)
                             .fontWeight(.medium)
-                            .font(.caption) // Smaller text size
+                            .font(.caption)
                     }
-                    .padding(8) // Adjusted padding to match smaller content
-                    .cornerRadius(12) // Corner radius for the button
-                    .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 3) // Soft shadow
+                    .padding(8)
+                    .cornerRadius(12)
+                    .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 3)
                 }
                 
-                // Team Entries
                 ForEach(teams, id: \.self) { team in
                     VStack {
                         Image(team)
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 70, height: 70) // Slightly smaller team images
-                            .clipShape(Circle()) // Clip the image to a circle
+                            .frame(width: 70, height: 70)
+                            .clipShape(Circle())
                             .overlay(
                                 Circle()
-                                    .stroke(Color.blue, lineWidth: 0) // Circular border
+                                    .stroke(Color.blue, lineWidth: 0)
                             )
-                            .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2) // Shadow for team images
+                            .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
                         
-                        Text(team.capitalized) // Capitalize the team name for readability
+                        Text(team.capitalized)
                             .foregroundColor(.primary)
                             .fontWeight(.medium)
-                            .font(.caption) // Smaller font size for team names
+                            .font(.caption)
                     }
-                    .padding(.top, 8) // Adjusted padding
+                    .padding(.top, 8)
                 }
             }
-            .padding(.horizontal) // Horizontal padding for the scroll view
-            .padding(.vertical, 10) // Vertical padding for spacing
+            .padding(.horizontal)
+            .padding(.vertical, 10)
         }
-        .padding(.top, 20) // Top padding for the entire view
-        .background(Color(.systemGroupedBackground)) // Background for the overall view
-        .cornerRadius(15) // Rounded corners for the overall view
+        .padding(.top, 20)
+        .background(Color(.systemGroupedBackground))
+        .cornerRadius(15)
     }
 }
 

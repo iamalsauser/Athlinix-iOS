@@ -4,7 +4,7 @@ import SwiftUI
 struct UserProfile: Identifiable {
     let id = UUID()
     let name: String
-    let profileImage: String // Assumes you have image names in assets
+    let profileImage: String
     var isFollowed: Bool = false
 }
 
@@ -37,7 +37,7 @@ struct ProfileSliderView: View {
     }
 }
 
-// Subview for each profile card
+
 struct ProfileCardView: View {
     @Binding var profile: UserProfile
     
@@ -46,7 +46,7 @@ struct ProfileCardView: View {
             Image(profile.profileImage)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 60, height: 60) // Smaller profile image
+                .frame(width: 60, height: 60)
                 .clipShape(Circle())
                 .overlay(Circle().stroke(Color.white, lineWidth: 2))
                 .shadow(radius: 3)
@@ -56,7 +56,7 @@ struct ProfileCardView: View {
                 .lineLimit(1)
             
             Button(action: {
-                profile.isFollowed.toggle() // Toggle follow state
+                profile.isFollowed.toggle()
             }) {
                 Text(profile.isFollowed ? "Following" : "Follow")
                     .font(.caption)
@@ -67,7 +67,7 @@ struct ProfileCardView: View {
                     .cornerRadius(15)
             }
         }
-        .frame(width: 80) // Reduced width for each card
+        .frame(width: 80) 
     }
 }
 

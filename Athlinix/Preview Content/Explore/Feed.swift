@@ -28,7 +28,6 @@ struct InstagramFeedView: View {
     }
 }
 
-// PostView for each post
 struct PostView: View {
     let post: Post
     @Binding var likedPosts: Set<UUID>
@@ -37,7 +36,7 @@ struct PostView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            NavigationLink(destination: ProfileStat1(selectedButton: .constant("profile"))) { // Navigation link
+            NavigationLink(destination: ProfileStat1(selectedButton: .constant("profile"))) {
                 UserProfileView(user: post.user)
             }
             PostImagesView(images: post.images)
@@ -52,7 +51,7 @@ struct PostView: View {
     }
 }
 
-// UserProfileView to show user information
+
 struct UserProfileView: View {
     let user: User
 
@@ -75,7 +74,7 @@ struct UserProfileView: View {
     }
 }
 
-// PostImagesView for displaying post images
+
 struct PostImagesView: View {
     let images: [String]
 
@@ -104,7 +103,7 @@ struct PostImagesView: View {
     }
 }
 
-// LikeShareSection for the like and share buttons
+
 struct LikeShareSection: View {
     let post: Post
     @Binding var likedPosts: Set<UUID>
@@ -144,7 +143,7 @@ struct LikeShareSection: View {
     }
 }
 
-// CaptionView to show the post caption
+
 struct CaptionView: View {
     let post: Post
 
@@ -165,7 +164,7 @@ struct CaptionView: View {
     }
 }
 
-// CommentSection for handling comments
+
 struct CommentSection: View {
     let post: Post
     @Binding var comments: [UUID: String]
@@ -195,7 +194,7 @@ struct CommentSection: View {
     }
 }
 
-// Models
+
 struct User {
     let name: String
     let profileImage: String
@@ -210,7 +209,7 @@ struct Post: Identifiable {
     let teamLogo: String
 }
 
-// Preview
+
 struct InstagramFeedView_Previews: PreviewProvider {
     static var previews: some View {
         InstagramFeedView()

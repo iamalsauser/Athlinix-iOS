@@ -6,7 +6,7 @@ struct cBestGameView: View {
                 .font(.headline)
                 .padding(.bottom, 10)
             
-            // Placeholder for Best Game Info
+            
             RoundedRectangle(cornerRadius: 10)
                 .fill(Color.white)
                 .frame(height: 150)

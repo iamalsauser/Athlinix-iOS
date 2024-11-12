@@ -3,32 +3,26 @@ import Charts
 
 struct ScoringEfficiencyView: View {
     var pointsPerGame: Double
-    var percentageChange: Double // Use positive for increase, negative for decrease
-    var pointsData: [(String, Double)] // Array of tuples containing (date, points)
+    var percentageChange: Double
+    var pointsData: [(String, Double)]
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            // Title
             Text("Scoring Efficiency")
                 .font(.headline)
                 .foregroundColor(.primary)
                 .padding(.bottom, 5)
             
-            // HStack for Points per Game and Line Chart
             HStack(alignment: .top) {
-                // Points per Game Section
                 VStack(alignment: .leading, spacing: 5) {
-                    // Points per Game Label
                     Text("Points per Game")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                     
-                    // Value of points per game
                     Text("\(String(format: "%.1f", pointsPerGame))")
                         .font(.title)
                         .fontWeight(.bold)
                     
-                    // Percentage change with arrow
                     HStack(spacing: 5) {
                         if percentageChange > 0 {
                             Image(systemName: "arrow.up")
@@ -48,21 +42,18 @@ struct ScoringEfficiencyView: View {
                 
                 Spacer()
                 
-                // Line Chart Section
                 lineChartView(pointsData: pointsData)
-                    .frame(height: 120) // Adjusted height for balance
-                    .padding(.leading, 10) // Padding to space out from the text
+                    .frame(height: 120)
+                    .padding(.leading, 10)
             }
             .padding(.bottom, 10)
         }
         .padding()
-        .background(Color(hex: "E0E0E0").opacity(0.5)) // Background color with slight transparency
+        .background(Color(hex: "E0E0E0").opacity(0.5))
         .cornerRadius(10)
-//        .shadow(radius: 5)
     }
 }
 
-// Line Chart View
 struct lineChartView: View {
     var pointsData: [(String, Double)]
 
@@ -76,16 +67,14 @@ struct lineChartView: View {
                 .foregroundStyle(Color.blue)
             }
         }
-        .chartXAxis(.hidden) // Hide x-axis
-        .chartYAxis(.hidden) // Hide y-axis
-        .padding(.trailing) // Padding to adjust the chart inside the container
+        .chartXAxis(.hidden)
+        .chartYAxis(.hidden)
+        .padding(.trailing)
     }
 }
 
-// Preview
 struct ScoringEfficiencyView_Previews: PreviewProvider {
     static var previews: some View {
-        // Sample data for the chart
         let sampleData: [(String, Double)] = [
             ("Oct 1", 20),
             ("Oct 2", 24),

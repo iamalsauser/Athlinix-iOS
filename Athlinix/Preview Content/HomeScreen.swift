@@ -1,23 +1,21 @@
 import SwiftUI
 
 struct HomeScreen: View {
-    @Binding var selectedButton: String // Use binding to track the selected state
+    @Binding var selectedButton: String
 
     var body: some View {
         ZStack(alignment: .top) {
-            // ContentView as a Subview
-            ContentView(selectedTab: $selectedButton) // Embedding ContentView
+            ContentView(selectedTab: $selectedButton)
 
-            // Conditionally show HeaderView only on the Home tab
             if selectedButton == "home" {
                 HeaderView()
                     .padding(.top, 60)
                     .ignoresSafeArea(edges: .top)
             }
         }
-        .navigationBarHidden(true) // Hide the default nav bar
+        .navigationBarHidden(true)
         .onAppear {
-            selectedButton = "home" // Set the selected button to home when this screen appears
+            selectedButton = "home"
         }
     }
 }
@@ -27,11 +25,8 @@ struct ContentView: View {
 
     var body: some View {
         TabView(selection: $selectedTab) {
-            // Home Tab
             ScrollView {
                 VStack(spacing: 10) {
-                    
-                    // Points Scored Section
                     HStack {
                         Text("Points Scored")
                             .font(.headline)
@@ -45,14 +40,12 @@ struct ContentView: View {
                                 .padding(.trailing)
                         }
                     }
-                    .padding(.top, 220) // Adjust top padding as needed
-                    
-                    // Bar Chart for Points Scored Section
+                    .padding(.top, 220)
+
                     LineChartView()
-                        .frame(height: 200) // Adjusted height for better fit
+                        .frame(height: 200)
                         .padding()
 
-                    // Pinned Matches Section
                     HStack {
                         Text("Pinned Matches")
                             .font(.headline)
@@ -69,7 +62,6 @@ struct ContentView: View {
                     .padding(.top, 10)
                     .padding(.horizontal)
 
-                    // Match Summary View (example)
                     MatchSummaryViewFormat1(
                         teamA: "Lakers",
                         teamB: "Spurs",
@@ -81,16 +73,13 @@ struct ContentView: View {
                     )
                     .padding(.horizontal)
 
-                    // ImageViewer
                     ImageViewer(imageName: "highlight", matchDetails: "Lakers vs BFI, Miami")
                         .padding(.horizontal)
                         .padding(.top, 10)
 
-                    // Profile Slider View (example)
                     ProfileSliderView()
                         .padding(.top, 10)
 
-                    // Bar Chart View (example)
                     EnhancedBarChartView()
                         .padding(.top, 50)
                 }
@@ -103,7 +92,6 @@ struct ContentView: View {
             }
             .tag("home")
             
-            // Explore Tab
             Explore(selectedButton: $selectedTab)
                 .tabItem {
                     Image(systemName: "globe")
@@ -111,7 +99,6 @@ struct ContentView: View {
                 }
                 .tag("explore")
             
-            // Profile Tab
             ProfileStat(selectedButton: $selectedTab)
                 .tabItem {
                     Image(systemName: "person.fill")
@@ -119,7 +106,7 @@ struct ContentView: View {
                 }
                 .tag("profile")
         }
-        .accentColor(.blue) // Customize the color of the selected tab
+        .accentColor(.blue)
     }
 }
 

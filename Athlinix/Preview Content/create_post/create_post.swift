@@ -9,14 +9,12 @@ struct CreatePostView: View {
     @State private var team2Score: Int = 0
     @State private var selectedImageItem: PhotosPickerItem?
     @State private var selectedMembers: [InviteMember] = []
-    // Maximum number of images allowed
     let maxImages = 5
     
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 20) {
-                    // Image Grid Section
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 12) {
                             ForEach(selectedImages.indices, id: \.self) { index in
@@ -37,9 +35,7 @@ struct CreatePostView: View {
                         .padding(.horizontal)
                     }
                     
-                    // Destination Button
                     Button(action: {
-                        // Handle destination action
                     }) {
                         HStack {
                             Image(systemName: "info.circle.fill")
@@ -54,9 +50,7 @@ struct CreatePostView: View {
                         .padding(.horizontal)
                     }
                     
-                    // Teams Section
                     HStack(spacing: 40) {
-                        // Team 1
                         TeamScoreView(
                             teamLogo: "lakersLogo",
                             teamName: "South Cali",
@@ -68,7 +62,6 @@ struct CreatePostView: View {
                             .font(.title2)
                             .fontWeight(.bold)
                         
-                        // Team 2
                         TeamScoreView(
                             teamLogo: "plus",
                             teamName: "Add",
@@ -78,7 +71,6 @@ struct CreatePostView: View {
                     }
                     .padding()
 
-                    // Members Section
                     VStack {
                         Text("Members")
                             .font(.title3)
@@ -86,16 +78,15 @@ struct CreatePostView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.horizontal)
 
-                        // Adjust the NavigationLink here
                         NavigationLink(destination: InviteView(selectedMembers: $selectedMembers)) {
                             Image(systemName: "plus")
                                 .foregroundColor(.white)
-                                .padding() // Add some padding to the plus icon
-                                .background(Color.orange) // Optional: Add background color
-                                .clipShape(Circle()) // Optional: Make it round
+                                .padding()
+                                .background(Color.orange)
+                                .clipShape(Circle())
                         }
                     }
-                    .padding(.top, 10) // Optional: Add padding to the top for better spacing
+                    .padding(.top, 10)
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
@@ -120,7 +111,6 @@ struct CreatePostView: View {
     }
 }
 
-// MARK: - Supporting Views
 struct AddImageButton: View {
     var body: some View {
         RoundedRectangle(cornerRadius: 12)
@@ -174,7 +164,7 @@ struct TeamScoreView: View {
         }
     }
 }
-// Preview
+
 struct CreatePostView_Previews: PreviewProvider {
     static var previews: some View {
         CreatePostView()

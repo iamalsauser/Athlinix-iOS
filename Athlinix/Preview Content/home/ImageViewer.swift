@@ -9,11 +9,11 @@ struct ImageViewer: View {
             Image(imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(height: 200) // Adjust height as needed
+                .frame(height: 200)
             Text(matchDetails)
                 .font(.caption)
                 .foregroundColor(.gray)
-                .multilineTextAlignment(.center) // Center the text if it wraps
+                .multilineTextAlignment(.center) 
         }
         .padding()
         .background(Color.white)

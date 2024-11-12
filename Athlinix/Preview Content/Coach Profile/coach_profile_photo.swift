@@ -4,8 +4,8 @@ struct cProfileView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                // Blurred background using the same profile image
-                Image("coach") // Replace with your actual profile image
+                
+                Image("coach")
                     .resizable()
                     .scaledToFill()
                     .frame(width: UIScreen.main.bounds.width, height: 250)
@@ -16,8 +16,8 @@ struct cProfileView: View {
                     .padding(.bottom, 60)
                 
                 VStack {
-                    // Circle profile image in the middle
-                    Image("cavs") // Replace with your actual profile image
+                    
+                    Image("cavs")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 120, height: 120)
@@ -25,26 +25,26 @@ struct cProfileView: View {
                         .padding(.top, 50)
                         .shadow(radius: 10)
                     
-                    // Best Game at the bottom
+                    
                 }
-                .padding(.top, 120) // Adjust the spacing if necessary
+                .padding(.top, 120)
             }
             .overlay(
                 NavigationLink(destination: DestinationView()) {
-                    Image("lakers") // Replace with your Windows logo image
+                    Image("lakers")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 30, height: 30) // Adjust size as needed
+                        .frame(width: 30, height: 30)
                         .padding()
                 }
-                .buttonStyle(PlainButtonStyle()), // To remove default button appearance
+                .buttonStyle(PlainButtonStyle()),
                 alignment: .topTrailing
             )
         }
     }
 }
 
-// Destination view to navigate to
+
 struct DestinationView: View {
     var body: some View {
         Image("licence")
