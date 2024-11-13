@@ -21,7 +21,7 @@ struct BasketballMatchTemplate: View {
     @State private var blocks = ""
     
     @State private var playerStats: [PlayerStats] = []
-    @State private var showingAllStats = false
+    @State private var showAllPlayerStats = false
 
     var body: some View {
         NavigationView {
@@ -48,7 +48,7 @@ struct BasketballMatchTemplate: View {
                     }
                 }
                 
-                Button(action: { showingAllStats = true }) {
+                Button(action: { showAllPlayerStats = true }) {
                     Text("View All Player Stats")
                         .frame(maxWidth: .infinity)
                         .padding()
@@ -56,24 +56,13 @@ struct BasketballMatchTemplate: View {
                         .foregroundColor(.white)
                         .cornerRadius(8)
                 }
-                .sheet(isPresented: $showingAllStats) {
+                .sheet(isPresented: $showAllPlayerStats) {
                     AllPlayerStatsView(playerStats: playerStats)
                 }
             }
             .navigationTitle("Your Match Stats")
             .onAppear(perform: loadPlayerStats)
         }
-    }
-    
-    private func createPlayerStats() -> PlayerStats? {
-        guard let points = Int(points),
-              let rebounds = Int(rebounds),
-              let assists = Int(assists),
-              let steals = Int(steals),
-              let blocks = Int(blocks),
-              !playerName.isEmpty else { return nil }
-        
-        return PlayerStats(name: playerName, points: points, rebounds: rebounds, assists: assists, steals: steals, blocks: blocks, matchDate: matchDate)
     }
     
     private func submitStats() {
@@ -86,6 +75,17 @@ struct BasketballMatchTemplate: View {
         }
     }
 
+    private func createPlayerStats() -> PlayerStats? {
+        guard let points = Int(points),
+              let rebounds = Int(rebounds),
+              let assists = Int(assists),
+              let steals = Int(steals),
+              let blocks = Int(blocks),
+              !playerName.isEmpty else { return nil }
+        
+        return PlayerStats(name: playerName, points: points, rebounds: rebounds, assists: assists, steals: steals, blocks: blocks, matchDate: matchDate)
+    }
+    
     private func resetInputFields() {
         playerName = ""
         points = ""
@@ -143,21 +143,34 @@ struct AllPlayerStatsView: View {
     }
     
     @State private var selectedGrouping: GroupingType = .date
+    @State private var searchText = ""
+    @State private var sortOption = "Points"
+    
     let playerStats: [PlayerStats]
 
     var groupedStats: [String: [PlayerStats]] {
         let formatter = DateFormatter()
         
         switch selectedGrouping {
-        case .date:
-            formatter.dateFormat = "yyyy-MM-dd"
-        case .month:
-            formatter.dateFormat = "yyyy-MM"
-        case .year:
-            formatter.dateFormat = "yyyy"
+        case .date: formatter.dateFormat = "yyyy-MM-dd"
+        case .month: formatter.dateFormat = "yyyy-MM"
+        case .year: formatter.dateFormat = "yyyy"
         }
         
-        return Dictionary(grouping: playerStats) { formatter.string(from: $0.matchDate) }
+        let filteredStats = playerStats.filter {
+            searchText.isEmpty || $0.name.localizedCaseInsensitiveContains(searchText)
+        }
+        
+        let sortedStats = filteredStats.sorted {
+            switch sortOption {
+            case "Points": return $0.points > $1.points
+            case "Assists": return $0.assists > $1.assists
+            case "Rebounds": return $0.rebounds > $1.rebounds
+            default: return true
+            }
+        }
+        
+        return Dictionary(grouping: sortedStats) { formatter.string(from: $0.matchDate) }
     }
 
     var body: some View {
@@ -171,14 +184,25 @@ struct AllPlayerStatsView: View {
                 .pickerStyle(SegmentedPickerStyle())
                 .padding()
                 
+                HStack {
+                    TextField("Search by Player Name", text: $searchText)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .padding(.horizontal)
+                    
+                    Menu("Sort By") {
+                        Button("Points") { sortOption = "Points" }
+                        Button("Assists") { sortOption = "Assists" }
+                        Button("Rebounds") { sortOption = "Rebounds" }
+                    }
+                    .padding()
+                }
+                
                 List {
                     ForEach(groupedStats.keys.sorted(by: >), id: \.self) { key in
                         Section(header: Text(key)) {
                             ForEach(groupedStats[key] ?? []) { stats in
                                 VStack(alignment: .leading, spacing: 8) {
-                                    Text(stats.name)
-                                        .font(.headline)
-                                    
+                                    Text(stats.name).font(.headline)
                                     HStack {
                                         Image(systemName: "calendar")
                                         Text("Match Date: \(formatDate(stats.matchDate))")
@@ -225,7 +249,6 @@ struct AllPlayerStatsView: View {
         return formatter.string(from: date)
     }
 }
-
 
 #Preview {
     BasketballMatchTemplate()
