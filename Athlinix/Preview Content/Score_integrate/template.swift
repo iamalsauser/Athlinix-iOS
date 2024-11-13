@@ -1,6 +1,5 @@
 import SwiftUI
 
-
 struct PlayerStats: Identifiable, Codable {
     var id = UUID()
     var name: String
@@ -22,6 +21,7 @@ struct BasketballMatchTemplate: View {
     @State private var blocks = ""
     
     @State private var playerStats: [PlayerStats] = []
+    @State private var showingAllStats = false
 
     var body: some View {
         NavigationView {
@@ -48,39 +48,7 @@ struct BasketballMatchTemplate: View {
                     }
                 }
                 
-                if !playerStats.isEmpty {
-                    Section(header: Text("Your Stats Summary")) {
-                        ForEach(playerStats) { stats in
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text(stats.name)
-                                    .font(.headline)
-                                
-                                HStack {
-                                    Image(systemName: "calendar")
-                                    Text("Match Date: \(formatDate(stats.matchDate))")
-                                        .font(.subheadline)
-                                        .foregroundColor(.secondary)
-                                }
-                                Divider().padding(.vertical, 4)
-                                
-                                VStack(alignment: .leading, spacing: 4) {
-                                    statRow(title: "Points", value: stats.points)
-                                    statRow(title: "Rebounds", value: stats.rebounds)
-                                    statRow(title: "Assists", value: stats.assists)
-                                    statRow(title: "Steals", value: stats.steals)
-                                    statRow(title: "Blocks", value: stats.blocks)
-                                }
-                            }
-                            .padding()
-                            .background(Color(.systemGray6))
-                            .cornerRadius(10)
-                            .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
-                            .padding(.vertical, 4)
-                        }
-                    }
-                }
-                
-                Button(action: viewAllPlayerStats) {
+                Button(action: { showingAllStats = true }) {
                     Text("View All Player Stats")
                         .frame(maxWidth: .infinity)
                         .padding()
@@ -88,17 +56,12 @@ struct BasketballMatchTemplate: View {
                         .foregroundColor(.white)
                         .cornerRadius(8)
                 }
+                .sheet(isPresented: $showingAllStats) {
+                    AllPlayerStatsView(playerStats: playerStats)
+                }
             }
             .navigationTitle("Your Match Stats")
             .onAppear(perform: loadPlayerStats)
-        }
-    }
-    
-    private func statRow(title: String, value: Int) -> some View {
-        HStack {
-            Text("\(title):").foregroundColor(.secondary)
-            Spacer()
-            Text("\(value)").foregroundColor(.primary)
         }
     }
     
@@ -170,10 +133,89 @@ struct BasketballMatchTemplate: View {
     private func loadPlayerStats() {
         playerStats = loadAllPlayerStats()
     }
+}
+
+struct AllPlayerStatsView: View {
+    enum GroupingType: String, CaseIterable {
+        case date = "Date"
+        case month = "Month"
+        case year = "Year"
+    }
     
-    private func viewAllPlayerStats() {
-        let allStats = loadAllPlayerStats()
-        print("All Player Stats: \(allStats)")
+    @State private var selectedGrouping: GroupingType = .date
+    let playerStats: [PlayerStats]
+
+    var groupedStats: [String: [PlayerStats]] {
+        let formatter = DateFormatter()
+        
+        switch selectedGrouping {
+        case .date:
+            formatter.dateFormat = "yyyy-MM-dd"
+        case .month:
+            formatter.dateFormat = "yyyy-MM"
+        case .year:
+            formatter.dateFormat = "yyyy"
+        }
+        
+        return Dictionary(grouping: playerStats) { formatter.string(from: $0.matchDate) }
+    }
+
+    var body: some View {
+        NavigationView {
+            VStack {
+                Picker("Grouping", selection: $selectedGrouping) {
+                    ForEach(GroupingType.allCases, id: \.self) { grouping in
+                        Text(grouping.rawValue).tag(grouping)
+                    }
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                .padding()
+                
+                List {
+                    ForEach(groupedStats.keys.sorted(by: >), id: \.self) { key in
+                        Section(header: Text(key)) {
+                            ForEach(groupedStats[key] ?? []) { stats in
+                                VStack(alignment: .leading, spacing: 8) {
+                                    Text(stats.name)
+                                        .font(.headline)
+                                    
+                                    HStack {
+                                        Image(systemName: "calendar")
+                                        Text("Match Date: \(formatDate(stats.matchDate))")
+                                            .font(.subheadline)
+                                            .foregroundColor(.secondary)
+                                    }
+                                    Divider().padding(.vertical, 4)
+                                    
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        statRow(title: "Points", value: stats.points)
+                                        statRow(title: "Rebounds", value: stats.rebounds)
+                                        statRow(title: "Assists", value: stats.assists)
+                                        statRow(title: "Steals", value: stats.steals)
+                                        statRow(title: "Blocks", value: stats.blocks)
+                                    }
+                                }
+                                .padding()
+                                .background(Color(.systemGray6))
+                                .cornerRadius(10)
+                                .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
+                                .padding(.vertical, 4)
+                            }
+                        }
+                    }
+                }
+                .listStyle(InsetGroupedListStyle())
+            }
+            .navigationTitle("All Player Stats")
+        }
+    }
+    
+    private func statRow(title: String, value: Int) -> some View {
+        HStack {
+            Text("\(title):").foregroundColor(.secondary)
+            Spacer()
+            Text("\(value)").foregroundColor(.primary)
+        }
     }
     
     private func formatDate(_ date: Date) -> String {
@@ -183,6 +225,7 @@ struct BasketballMatchTemplate: View {
         return formatter.string(from: date)
     }
 }
+
 
 #Preview {
     BasketballMatchTemplate()
