@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct cProfileStat: View {
     @Binding var selectedButton: String
@@ -8,7 +9,8 @@ struct cProfileStat: View {
             VStack(spacing: 0) {
                 ScrollView {
                     VStack {
-                        cProfileView()
+                        NavigationLink(destination: Cert_template()) {
+                            cProfileView()}
                         cProfileInfoView()
                         cStatsView()
                         Spacer()
