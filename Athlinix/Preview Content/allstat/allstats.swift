@@ -2,38 +2,25 @@ import SwiftUI
 
 struct AllStatsViewstat: View {
     @State private var selectedOption: String = "Monthly"
-    var totalPoints = 1260
-    var gamesPlayed = 63
-    var pointsPerGame = 24.3
-    var percentageChange = 3.5
-
-    let sampleData1: [(String, Double)] = [
-        ("Game 1", 15),
-        ("Game 2", 20),
-        ("Game 3", 18),
-        ("Game 4", 25),
-        ("Game 5", 30)
-    ]
-    
-    let sampleData2: [(String, Double)] = [
-        ("Game 1", 10),
-        ("Game 2", 25),
-        ("Game 3", 20),
-        ("Game 4", 15),
-        ("Game 5", 30)
-    ]
+    private let statsData = allStatsDataModel.mockData
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 10) {
-                StatsSummaryView(totalPoints: totalPoints, gamesPlayed: gamesPlayed)
+                StatsSummaryView(totalPoints: statsData.totalPoints, gamesPlayed: statsData.gamesPlayed)
                     .padding(.bottom, 0).padding(.top, 0)
 
-                ScoringEfficiencyView(pointsPerGame: pointsPerGame, percentageChange: percentageChange, pointsData: sampleData1)
+                ScoringEfficiencyView(data: ScoringEfficiencyData(
+                    pointsPerGame: statsData.pointsPerGame,
+                    percentageChange: statsData.percentageChange,
+                    pointsData: statsData.sampleData1
+                ))
+                .padding(.bottom, 0)
+
+                DetailedStatsView(chartData1: SampleData.assistData, chartData2: SampleData.reboundData)
+                    .padding(.top, 0)
                     .padding(.bottom, 0)
 
-                DetailedStatsView(chartData1: sampleData1, chartData2: sampleData2)
-                    .padding(.top, 0).padding(.bottom, 0)
 
                 Picker("Select Time Frame", selection: $selectedOption) {
                     Text("Monthly").tag("Monthly")

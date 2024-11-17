@@ -2,9 +2,7 @@ import SwiftUI
 import Charts
 
 struct ScoringEfficiencyView: View {
-    var pointsPerGame: Double
-    var percentageChange: Double
-    var pointsData: [(String, Double)]
+    var data: ScoringEfficiencyData
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -19,21 +17,21 @@ struct ScoringEfficiencyView: View {
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                     
-                    Text("\(String(format: "%.1f", pointsPerGame))")
+                    Text("\(String(format: "%.1f", data.pointsPerGame))")
                         .font(.title)
                         .fontWeight(.bold)
                     
                     HStack(spacing: 5) {
-                        if percentageChange > 0 {
+                        if data.percentageChange > 0 {
                             Image(systemName: "arrow.up")
                                 .foregroundColor(.green)
-                            Text("\(String(format: "%.1f", percentageChange))%")
+                            Text("\(String(format: "%.1f", data.percentageChange))%")
                                 .foregroundColor(.green)
                                 .font(.subheadline)
                         } else {
                             Image(systemName: "arrow.down")
                                 .foregroundColor(.red)
-                            Text("\(String(format: "%.1f", abs(percentageChange)))%")
+                            Text("\(String(format: "%.1f", abs(data.percentageChange)))%")
                                 .foregroundColor(.red)
                                 .font(.subheadline)
                         }
@@ -42,7 +40,7 @@ struct ScoringEfficiencyView: View {
                 
                 Spacer()
                 
-                lineChartView(pointsData: pointsData)
+                lineChartView(pointsData: data.pointsData)
                     .frame(height: 120)
                     .padding(.leading, 10)
             }
@@ -75,19 +73,11 @@ struct lineChartView: View {
 
 struct ScoringEfficiencyView_Previews: PreviewProvider {
     static var previews: some View {
-        let sampleData: [(String, Double)] = [
-            ("Oct 1", 20),
-            ("Oct 2", 24),
-            ("Oct 3", 22),
-            ("Oct 4", 30),
-            ("Oct 5", 28)
-        ]
-        
-        ScoringEfficiencyView(pointsPerGame: 24.3, percentageChange: 3.5, pointsData: sampleData)
+        ScoringEfficiencyView(data: ScoringEfficiencyData.positiveChangeSample)
             .previewLayout(.sizeThatFits)
             .padding()
         
-        ScoringEfficiencyView(pointsPerGame: 18.7, percentageChange: -1.2, pointsData: sampleData)
+        ScoringEfficiencyView(data: ScoringEfficiencyData.negativeChangeSample)
             .previewLayout(.sizeThatFits)
             .padding()
     }

@@ -2,8 +2,8 @@ import SwiftUI
 import Charts
 
 struct DetailedStatsView: View {
-    var chartData1: [(String, Double)]
-    var chartData2: [(String, Double)]
+    var chartData1: [StatsDataModel]
+    var chartData2: [StatsDataModel]
     
     var body: some View {
         HStack(spacing: 20) {
@@ -17,7 +17,7 @@ struct DetailedStatsView: View {
 }
 
 struct StatsContainerViews: View {
-    var chartData: [(String, Double)]
+    var chartData: [StatsDataModel]
     var title: String
     var value: Double
     var percentageChange: Double
@@ -72,14 +72,14 @@ struct StatsContainerViews: View {
 }
 
 struct lineChartViews: View {
-    var pointsData: [(String, Double)]
+    var pointsData: [StatsDataModel]
 
     var body: some View {
         Chart {
-            ForEach(pointsData, id: \.0) { (date, points) in
+            ForEach(pointsData, id: \.date) { data in
                 LineMark(
-                    x: .value("Date", date),
-                    y: .value("Points", points)
+                    x: .value("Date", data.date),
+                    y: .value("Value", data.value)
                 )
                 .foregroundStyle(Color.blue)
             }
@@ -91,15 +91,7 @@ struct lineChartViews: View {
 
 struct DetailedStatsView_Previews: PreviewProvider {
     static var previews: some View {
-        let sampleData1: [(String, Double)] = [
-            ("Oct 1", 10), ("Oct 2", 15), ("Oct 3", 20), ("Oct 4", 25), ("Oct 5", 30)
-        ]
-        
-        let sampleData2: [(String, Double)] = [
-            ("Oct 1", 30), ("Oct 2", 25), ("Oct 3", 20), ("Oct 4", 15), ("Oct 5", 10)
-        ]
-        
-        DetailedStatsView(chartData1: sampleData1, chartData2: sampleData2)
+        DetailedStatsView(chartData1: SampleData.assistData, chartData2: SampleData.reboundData)
             .previewLayout(.sizeThatFits)
             .padding()
     }
