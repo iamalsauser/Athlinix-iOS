@@ -33,8 +33,8 @@ class kitViewController: UIViewController, UITableViewDataSource, UITableViewDel
             // Initialize sample data
             matches = [
                 Matchkit(
-                    homeTeamLogo: UIImage(named: "team1")!,
-                    awayTeamLogo: UIImage(named: "team2")!,
+                    homeTeamLogo: UIImage(named: "lakers")!,
+                    awayTeamLogo: UIImage(named: "heat")!,
                     homeTeamName: "76ers",
                     awayTeamName: "Raptors",
                     fieldGoals: (34, 24),
@@ -43,8 +43,8 @@ class kitViewController: UIViewController, UITableViewDataSource, UITableViewDel
                     date: createDate(day: 10, month: 9, year: 2024)
                 ),
                 Matchkit(
-                    homeTeamLogo: UIImage(named: "team3")!,
-                    awayTeamLogo: UIImage(named: "team4")!,
+                    homeTeamLogo: UIImage(named: "heat")!,
+                    awayTeamLogo: UIImage(named: "lakers")!,
                     homeTeamName: "Lakers",
                     awayTeamName: "Knicks",
                     fieldGoals: (47, 47),

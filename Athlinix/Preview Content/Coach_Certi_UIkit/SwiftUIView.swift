@@ -16,7 +16,7 @@ struct Cert_template: View {
 
 struct storyboardview: UIViewControllerRepresentable{
     func makeUIViewController(context: Context) -> UIViewController {
-        let storyboard=UIStoryboard(name: "Main", bundle: Bundle.main)
+        let storyboard=UIStoryboard(name: "Main1", bundle: Bundle.main)
         let controller = storyboard.instantiateViewController(identifier: "Cert")
         return controller
     }
