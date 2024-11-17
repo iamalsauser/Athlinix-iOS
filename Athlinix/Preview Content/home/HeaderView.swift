@@ -5,6 +5,7 @@ struct HeaderView: View {
     @State private var showingActionSheet = false
     @State private var navigateToCreatePost = false
     @State private var navigateToBasketballMatch = false
+    @State private var navigateToCreateTeam = false // New navigation state
 
     var body: some View {
         VStack(spacing: 20) {
@@ -31,6 +32,9 @@ struct HeaderView: View {
                         .default(Text("Add Match")) {
                             navigateToBasketballMatch = true
                         },
+                        .default(Text("Create Team")) { // New action for Create Team
+                            navigateToCreateTeam = true
+                        },
                         .cancel()
                     ])
                 }
@@ -38,6 +42,7 @@ struct HeaderView: View {
                 // NavigationLinks for programmatic navigation
                 NavigationLink(destination: CreatePostView(), isActive: $navigateToCreatePost) { EmptyView() }
                 NavigationLink(destination: BasketballMatchTemplate(), isActive: $navigateToBasketballMatch) { EmptyView() }
+                NavigationLink(destination: CreateTeamView(), isActive: $navigateToCreateTeam) { EmptyView() } // New navigation link
             }
             .padding(.top, 40) // Adjust padding for status bar overlap
             .padding(.horizontal)
