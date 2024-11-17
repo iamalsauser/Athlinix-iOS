@@ -16,7 +16,7 @@ class membersCollectionViewCell: UICollectionViewCell {
     func configure(with athlete: Athlete) {
         memberLabel.text = athlete.name
        // memberLabel.text = "@\(athlete.username)"
-        membersProfile.image = UIImage(named: athlete.profileImage)
+        membersProfile.image = UIImage(named: "profile")
       }
     
 }

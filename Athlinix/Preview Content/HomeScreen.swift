@@ -2,6 +2,7 @@ import SwiftUI
 
 struct HomeScreen: View {
     @Binding var selectedButton: String
+    @State private var isHeaderTapped = false  // State to track if the header was tapped
 
     var body: some View {
         ZStack(alignment: .top) {
@@ -11,11 +12,17 @@ struct HomeScreen: View {
                 HeaderView()
                     .padding(.top, 60)
                     .ignoresSafeArea(edges: .top)
+                    .onTapGesture {
+                        isHeaderTapped.toggle()  // Toggle the sheet state when HeaderView is tapped
+                    }
             }
         }
         .navigationBarHidden(true)
         .onAppear {
             selectedButton = "home"
+        }
+        .sheet(isPresented: $isHeaderTapped) {  // Show sheet when the state is true
+            teamscreen_uikit()  // Your custom view for the sheet
         }
     }
 }
@@ -107,6 +114,19 @@ struct ContentView: View {
                 .tag("profile")
         }
         .accentColor(.blue)
+    }
+}
+
+struct HeaderSheetView: View {
+    var body: some View {
+        VStack {
+            Text("This is a header sheet")
+                .font(.largeTitle)
+                .padding()
+            Button("Dismiss") {
+                // You can dismiss the sheet programmatically if needed
+            }
+        }
     }
 }
 

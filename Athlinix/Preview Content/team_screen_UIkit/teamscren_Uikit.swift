@@ -10,7 +10,7 @@ import UIKit
 
 struct teamscreen_uikit: View {
     var body: some View {
-        matchview_uikit().edgesIgnoringSafeArea(.all)
+        Teamview_uikit().edgesIgnoringSafeArea(.all)
     }
 }
 struct Teamview_uikit: UIViewControllerRepresentable{
