@@ -99,7 +99,7 @@ struct ContentView: View {
             }
             .tag("home")
             
-            Explore(selectedButton: $selectedTab)
+            Explore_UIkit(/*selectedButton: $selectedTab*/)
                 .tabItem {
                     Image(systemName: "globe")
                     Text("Explore")
