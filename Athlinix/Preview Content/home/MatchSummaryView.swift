@@ -62,7 +62,7 @@ struct MatchSummaryViewFormat1: View {
             }
         }
         .padding()
-        .background(Color(UIColor.systemBackground))
+        .background(Color(UIColor.secondarySystemBackground))
         .cornerRadius(30)
         .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 5)
     }

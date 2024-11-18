@@ -35,7 +35,7 @@ class team_ViewController: UIViewController, UICollectionViewDelegate, UICollect
           membersCollectionView.dataSource = self
           
           teamName.text = hello.teamName
-          teamImageView.image = UIImage(named: "spurs1")
+          teamImageView.image = UIImage(named: "warriors")
           // Initialize sample data
 
       }

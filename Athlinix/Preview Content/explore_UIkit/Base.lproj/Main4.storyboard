@@ -17,14 +17,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Athlenix" translatesAutoresizingMaskIntoConstraints="NO" id="x6q-Yj-Dz1">
-                                <rect key="frame" x="16" y="59" width="174" height="38"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="38" id="NVS-72-aAA"/>
-                                </constraints>
-                            </imageView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="bNy-Cr-TXx">
+                                <rect key="frame" x="0.0" y="59" width="393" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="nmN-6N-pad"/>
+                                </connections>
+                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="0AQ-Mh-WUJ">
-                                <rect key="frame" x="16" y="97" width="361" height="721"/>
+                                <rect key="frame" x="16" y="144" width="361" height="674"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFit" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TrendingCell" rowHeight="179" id="vpQ-oa-iZY" customClass="TrendingCell" customModule="Athlinix" customModuleProvider="target">
@@ -273,13 +274,13 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="0AQ-Mh-WUJ" firstAttribute="top" secondItem="bNy-Cr-TXx" secondAttribute="bottom" constant="29" id="1BS-CX-3hk"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="0AQ-Mh-WUJ" secondAttribute="bottom" id="AvR-Sc-Epb"/>
-                            <constraint firstItem="x6q-Yj-Dz1" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Pqm-hL-2uw"/>
+                            <constraint firstItem="bNy-Cr-TXx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Ebn-Dp-PJ7"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0AQ-Mh-WUJ" secondAttribute="trailing" constant="16" id="UBa-SI-foy"/>
-                            <constraint firstItem="0AQ-Mh-WUJ" firstAttribute="top" secondItem="x6q-Yj-Dz1" secondAttribute="bottom" id="ZuE-Li-2eD"/>
+                            <constraint firstItem="0AQ-Mh-WUJ" firstAttribute="centerX" secondItem="bNy-Cr-TXx" secondAttribute="centerX" id="Ve8-9d-vLd"/>
+                            <constraint firstItem="bNy-Cr-TXx" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="bh2-hv-xwj"/>
                             <constraint firstItem="0AQ-Mh-WUJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="cmR-fJ-GXc"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="x6q-Yj-Dz1" secondAttribute="trailing" constant="203" id="fYh-H4-myZ"/>
-                            <constraint firstItem="x6q-Yj-Dz1" firstAttribute="leading" secondItem="0AQ-Mh-WUJ" secondAttribute="leading" id="woX-7J-Uw2"/>
                         </constraints>
                     </view>
                     <connections>

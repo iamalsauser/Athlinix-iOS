@@ -1,10 +1,9 @@
 //
-//  FeedCell 2.swift
+//  FeedCell.swift
 //  explore
 //
 //  Created by admin65 on 17/11/24.
 //
-
 
 import UIKit
 
@@ -24,8 +23,6 @@ class FeedCell: UITableViewCell {
     // Configure method to set up the cell's content
     private var isLiked: Bool = false
     
-    
-    
     func configure(with feed: Feed) {
         athleteNameLabel.text = feed.athleteName
         profileImageView.image = feed.athleteProfile
@@ -37,21 +34,41 @@ class FeedCell: UITableViewCell {
         imageView2.image = feed.image2
         imageView3.image = feed.image3
         updateLikeButtonAppearance()
+        
+        // Apply rounded corners
+        makeImagesRounded()
+    }
+    
+    private func makeImagesRounded() {
+        // Round profile image and team logo
+        profileImageView.layer.cornerRadius = profileImageView.frame.width / 2
+        profileImageView.layer.masksToBounds = true
+        
+        teamLogoImageView.layer.cornerRadius = teamLogoImageView.frame.width / 2
+        teamLogoImageView.layer.masksToBounds = true
+        
+        // Round the feed images
+        imageView1.layer.cornerRadius = 8 // Adjust radius as needed
+        imageView1.layer.masksToBounds = true
+        
+        imageView2.layer.cornerRadius = 8 // Adjust radius as needed
+        imageView2.layer.masksToBounds = true
+        
+        imageView3.layer.cornerRadius = 8 // Adjust radius as needed
+        imageView3.layer.masksToBounds = true
     }
     
     @IBAction func likeButtonTapped(_ sender: UIButton) {
-            isLiked.toggle() // Toggle the liked state
-            updateLikeButtonAppearance() // Update the button's appearance
-        }
+        isLiked.toggle() // Toggle the liked state
+        updateLikeButtonAppearance() // Update the button's appearance
+    }
 
-        // Method to update the button's appearance
-        private func updateLikeButtonAppearance() {
-            if isLiked {
-                //likeButton.tintColor = .red // Change color to red when liked
-                likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal) // Filled heart icon
-            } else {
-                //likeButton.tintColor = .lightGray // Change color to gray when unliked
-                likeButton.setImage(UIImage(systemName: "heart"), for: .normal) // Outline heart icon
-            }
+    // Method to update the button's appearance
+    private func updateLikeButtonAppearance() {
+        if isLiked {
+            likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal) // Filled heart icon
+        } else {
+            likeButton.setImage(UIImage(systemName: "heart"), for: .normal) // Outline heart icon
         }
+    }
 }

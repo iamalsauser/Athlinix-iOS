@@ -17,6 +17,16 @@ class coachCollectionViewCell: UICollectionViewCell {
         coachName.text = coach.name
            // usernameLabel.text = "@\(coach.username)"
         coachProfile.image = UIImage(named: "coach")
+        
+        coachProfile.layer.cornerRadius = coachProfile.frame.width / 2
+        coachProfile.layer.masksToBounds = true
         }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        // Ensures the corner radius is set after layout adjustments
+        coachProfile.layer.cornerRadius = coachProfile.frame.width / 2
+    }
 
 }
