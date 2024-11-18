@@ -8,6 +8,14 @@ struct ScoringEfficiencyData {
     var pointsData: [(String, Double)]
 }
 
+// Define the PlayerStatsq model to represent each player's match data
+struct PlayerStatsq: Identifiable, Decodable {
+    var id: String // Unique identifier (could be a UUID or other unique field)
+    var name: String
+    var points: Int
+    var matchDate: Date
+}
+
 struct ScoringEfficiencyView: View {
     var data: ScoringEfficiencyData
 
@@ -79,7 +87,6 @@ struct lineChartView: View {
 }
 
 // Fetch the player stats and process them for scoring efficiency
-// Fetch the player stats and process them for scoring efficiency
 func loadScoringEfficiencyData(from filename: String) -> ScoringEfficiencyData {
     let playerStats = loadPlayerStats1(from: filename)
     
@@ -91,9 +98,7 @@ func loadScoringEfficiencyData(from filename: String) -> ScoringEfficiencyData {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM d"
         
-        // Use the TimeInterval (stat.matchDate) directly to create the Date
         let date = stat.matchDate // If stat.matchDate is already a Date
-// This is correct
         
         let dateString = dateFormatter.string(from: date)
         return (dateString, Double(stat.points))
@@ -113,9 +118,8 @@ func loadScoringEfficiencyData(from filename: String) -> ScoringEfficiencyData {
     return ScoringEfficiencyData(pointsPerGame: pointsPerGame, percentageChange: percentageChange, pointsData: pointsData)
 }
 
-
 // Helper function to load player stats from JSON
-func loadPlayerStats1(from filename: String) -> [PlayerStats] {
+func loadPlayerStats1(from filename: String) -> [PlayerStatsq] {
     let fileManager = FileManager.default
     // Get the Documents directory in the current app sandbox
     guard let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
@@ -127,7 +131,7 @@ func loadPlayerStats1(from filename: String) -> [PlayerStats] {
 
     // Attempt to load and decode the JSON data
     guard let data = try? Data(contentsOf: fileURL),
-          let playerStats = try? JSONDecoder().decode([PlayerStats].self, from: data) else {
+          let playerStats = try? JSONDecoder().decode([PlayerStatsq].self, from: data) else {
         print("Failed to load data from \(fileURL.path)")
         return []
     }
