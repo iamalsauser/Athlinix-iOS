@@ -17,7 +17,7 @@ struct AllStatsViewstat: View {
                 ))
                 .padding(.bottom, 0)
 
-                DetailedStatsView(chartData1: SampleData.assistData, chartData2: SampleData.reboundData)
+                DetailedStatsView()
                     .padding(.top, 0)
                     .padding(.bottom, 0)
 
