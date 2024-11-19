@@ -1,27 +1,10 @@
+// AllMatchesList.swift
+
 import SwiftUI
-
-
-struct Match: Identifiable {
-    let id = UUID()
-    let teamA: String
-    let teamB: String
-    let scoreA: Int
-    let scoreB: Int
-    let date: String
-    let team1Stats: MatchStats
-    let team2Stats: MatchStats
-}
-
-
-struct MatchStats {
-    let fieldGoals: Int
-    let threePFieldGoals: Int
-    let freeThrows: Int
-}
-
 
 struct AllMatchesList: View {
     
+    // Sample matches data
     let matches: [Match] = [
         Match(teamA: "Lakers", teamB: "Bulls", scoreA: 110, scoreB: 105, date: "Oct 13, 2024", team1Stats: MatchStats(fieldGoals: 25, threePFieldGoals: 10, freeThrows: 15), team2Stats: MatchStats(fieldGoals: 20, threePFieldGoals: 8, freeThrows: 12)),
         Match(teamA: "Warriors", teamB: "Celtics", scoreA: 98, scoreB: 110, date: "Oct 12, 2024", team1Stats: MatchStats(fieldGoals: 30, threePFieldGoals: 12, freeThrows: 18), team2Stats: MatchStats(fieldGoals: 25, threePFieldGoals: 15, freeThrows: 20)),
@@ -50,7 +33,6 @@ struct AllMatchesList: View {
         .navigationTitle("Match Summaries")
     }
 }
-
 
 struct AllMatchesList_Previews: PreviewProvider {
     static var previews: some View {
