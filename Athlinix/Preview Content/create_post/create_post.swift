@@ -160,7 +160,8 @@ struct TeamScoreView: View {
                     Image(systemName: "plus.circle")
                         .font(.title2)
                 }.navigationBarBackButtonHidden(true)
-            }
+            }          .navigationBarHidden(true)
+
         }
     }
 }

@@ -6,6 +6,7 @@ struct HeaderView: View {
     @State private var navigateToCreatePost = false
     @State private var navigateToBasketballMatch = false
     @State private var navigateToCreateTeam = false // New navigation state
+    @State private var showApprovalUI = false // State to control `approvalui()` presentation
 
     var body: some View {
         VStack(spacing: 20) {
@@ -32,11 +33,21 @@ struct HeaderView: View {
                         .default(Text("Add Match")) {
                             navigateToBasketballMatch = true
                         },
-                        .default(Text("Create Team")) { // New action for Create Team
+                        .default(Text("Create Team")) {
                             navigateToCreateTeam = true
                         },
                         .cancel()
                     ])
+                }
+                
+                Button(action: {
+                    showApprovalUI = true // Toggle the sheet presentation
+                }) {
+                    Image(systemName: "bell")
+                        .foregroundColor(.white)
+                }
+                .sheet(isPresented: $showApprovalUI) {
+                    approvalui() // Present `approvalui()` as a sheet
                 }
                 
                 // NavigationLinks for programmatic navigation
@@ -44,11 +55,11 @@ struct HeaderView: View {
                 NavigationLink(destination: BasketballMatchTemplate(), isActive: $navigateToBasketballMatch) { EmptyView() }
                 NavigationLink(destination: CreateTeamView(), isActive: $navigateToCreateTeam) { EmptyView() } // New navigation link
             }
-            .padding(.top, 40) // Adjust padding for status bar overlap
+            .padding(.top, 40)
             .padding(.horizontal)
             
             HStack {
-                Image("profile") // Assuming you have an image named "profile"
+                Image("profile")
                     .resizable()
                     .frame(width: 80, height: 80)
                     .clipShape(Circle())
@@ -76,9 +87,9 @@ struct HeaderView: View {
             .padding([.leading, .trailing], 20)
         }
         .frame(maxWidth: .infinity)
-        .background(Color(red: 253/255, green: 100/255, blue: 48/255)) // FD6430 color
+        .background(Color(red: 253/255, green: 100/255, blue: 48/255))
         .cornerRadius(50)
-        .ignoresSafeArea(edges: .top) // Allow the header to extend above the safe area
+        .ignoresSafeArea(edges: .top)
     }
 }
 

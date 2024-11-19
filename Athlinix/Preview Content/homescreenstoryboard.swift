@@ -1,12 +1,13 @@
 import SwiftUI
 
 struct homescreenstoryboard: View {
-    @State private var selectedTab: String = "home" // State to track the selected tab
-    @State private var showingActionSheet = false // State to track when the action sheet should appear
-    @State private var navigateToCreatePost = false // Navigation state for Create Post
-    @State private var navigateToBasketballMatch = false // Navigation state for Basketball Match
-    @State private var navigateToCreateTeam = false // Navigation state for Create Team
-    
+    @State private var selectedTab: String = "home"
+    @State private var showingActionSheet = false
+    @State private var navigateToCreatePost = false
+    @State private var navigateToBasketballMatch = false
+    @State private var navigateToCreateTeam = false
+    @State private var showApprovalUI = false
+
     var body: some View {
         NavigationView {
             ZStack {
@@ -21,7 +22,7 @@ struct homescreenstoryboard: View {
                         .tag("home")
                     
                     // Explore Tab
-                    Explore_UIkit() // You can replace this with your actual Explore view
+                    Explore_UIkit()
                         .tabItem {
                             Image(systemName: "globe")
                             Text("Explore")
@@ -29,35 +30,59 @@ struct homescreenstoryboard: View {
                         .tag("explore")
                     
                     // Profile Tab
-                    ProfileStat(selectedButton: $selectedTab) // Assuming you have a ProfileStat view
-//                    ProfileUIKitController()
+                    ProfileUIKitController()
                         .tabItem {
                             Image(systemName: "person.fill")
                             Text("Profile")
                         }
                         .tag("profile")
                 }
-                .accentColor(.blue) // Optionally set accent color for the selected tab
+                .accentColor(.blue)
                 
                 // Floating button above the tab bar
                 VStack {
                     Spacer()
+
+                    // Notification Icon Button in the top-right corner
+                    HStack {
+                        Spacer()
+                        
+                        Button(action: {
+                            showApprovalUI = true
+                        }) {
+                            Image(systemName: "bell.fill")
+                                .font(.system(size: 20, weight: .semibold))
+                                .foregroundColor(.blue)
+                                .padding(10)
+                                .background(Color(.systemBackground).opacity(0.9))
+                                .clipShape(Circle())
+                                .overlay(
+                                    Circle()
+                                        .stroke(Color.gray.opacity(0.4), lineWidth: 1)
+                                )
+                        }
+                        .padding(.top, 30)  // Adds some top padding for spacing
+                        .padding(.trailing, 20)  // Adds space from the right edge
+                    }
+
+                    // Plus Button at the bottom-right
                     HStack {
                         Spacer()
                         Button(action: {
-                            // Show the action sheet when the floating button is pressed
                             showingActionSheet = true
                         }) {
-                            Image(systemName: "plus.circle.fill")
-                                .resizable()
-                                .frame(width: 30, height: 30)
-                                .foregroundColor(.white)
-                                .padding()
-                                .background(Color.orange)
+                            Image(systemName: "plus")
+                                .font(.system(size: 20, weight: .semibold))
+                                .foregroundColor(.blue)
+                                .padding(10)
+                                .background(Color(.systemBackground).opacity(0.9))
                                 .clipShape(Circle())
-                                .shadow(radius: 10)
+                                .overlay(
+                                    Circle()
+                                        .stroke(Color.gray.opacity(0.4), lineWidth: 1)
+                                )
                         }
-                        .padding(.bottom, 70) // Adjust the space above the TabView
+                        .padding(.bottom, 80) // Adjust the space above the TabView
                         .padding(.trailing, 20) // Position it towards the right corner
                     }
                 }
@@ -66,23 +91,22 @@ struct homescreenstoryboard: View {
                         title: Text("Choose an Option"),
                         buttons: [
                             .default(Text("Add Match")) {
-                                // Trigger navigation to BasketballMatchTemplate
                                 navigateToBasketballMatch = true
                             },
                             .default(Text("Create Team")) {
-                                // Trigger navigation to CreateTeamView
                                 navigateToCreateTeam = true
                             },
                             .default(Text("Create Post")) {
-                                // Trigger navigation to CreatePostView
                                 navigateToCreatePost = true
                             },
                             .cancel {
-                                // Cancel action
                                 print("ActionSheet dismissed")
                             }
                         ]
                     )
+                }
+                .sheet(isPresented: $showApprovalUI) {
+                    approvalui()
                 }
                 
                 // Navigation Links
@@ -90,7 +114,8 @@ struct homescreenstoryboard: View {
                 NavigationLink(destination: BasketballMatchTemplate(), isActive: $navigateToBasketballMatch) { EmptyView() }
                 NavigationLink(destination: CreateTeamView(), isActive: $navigateToCreateTeam) { EmptyView() }
             }
-        }.navigationBarHidden(true)
+        }
+        .navigationBarHidden(true)
     }
 }
 
