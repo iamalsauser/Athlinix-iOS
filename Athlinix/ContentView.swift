@@ -13,7 +13,10 @@ struct LogoScreen: View {
                     .frame(width: 200, height: 150)
                 Spacer()
                 
-                NavigationLink(destination: CreateAccountScreen(selectedButton: $selectedButton), isActive: $navigateToHome) {
+//                NavigationLink(destination: CreateAccountScreen(selectedButton: $selectedButton), isActive: $navigateToHome) {
+//                    EmptyView()
+//                }
+                NavigationLink(destination: homescreenstoryboard(), isActive: $navigateToHome) {
                     EmptyView()
                 }
             }

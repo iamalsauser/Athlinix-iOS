@@ -8,16 +8,16 @@
 import Foundation
 import UIKit
 
-struct Matchkit {
-    let homeTeamLogo: UIImage
-    let awayTeamLogo: UIImage
-    let homeTeamName: String
-    let awayTeamName: String
-    let fieldGoals: (home: Int, away: Int)
-    let threePointers: (home: Int, away: Int)
-    let freeThrows: (home: Int, away: Int)
-    let date: Date
-}
+//struct Matchkit {
+//    let homeTeamLogo: UIImage
+//    let awayTeamLogo: UIImage
+//    let homeTeamName: String
+//    let awayTeamName: String
+//    let fieldGoals: (home: Int, away: Int)
+//    let threePointers: (home: Int, away: Int)
+//    let freeThrows: (home: Int, away: Int)
+//    let date: Date
+//}
 
 //let matches: [Match] = [
 //    Match(
