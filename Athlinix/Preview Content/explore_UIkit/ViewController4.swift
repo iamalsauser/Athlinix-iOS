@@ -88,6 +88,17 @@ class viewui: UIViewController, UITableViewDelegate, UITableViewDataSource {
             image1: UIImage(named: "feed1")!,
             image2: UIImage(named: "feed2")!,
             image3: UIImage(named: "feed3")!
+        ),
+        Feed(
+            athleteName: "Liam",
+            athleteProfile: UIImage(named: "profile")!,
+            teamName: "Brooklyn Nets",
+            teamLogo: UIImage(named: "spurs1")!,
+            location: "Brooklyn",
+            likeCount: 2900,
+            image1: UIImage(named: "feed1")!,
+            image2: UIImage(named: "feed2")!,
+            image3: UIImage(named: "feed3")!
         )
     ]
 
