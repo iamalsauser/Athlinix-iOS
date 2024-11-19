@@ -89,7 +89,7 @@ struct homescreenstoryboard: View {
                 NavigationLink(destination: BasketballMatchTemplate(), isActive: $navigateToBasketballMatch) { EmptyView() }
                 NavigationLink(destination: CreateTeamView(), isActive: $navigateToCreateTeam) { EmptyView() }
             }
-        }
+        }.navigationBarHidden(true)
     }
 }
 

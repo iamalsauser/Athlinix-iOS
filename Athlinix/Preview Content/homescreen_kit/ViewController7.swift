@@ -60,7 +60,9 @@ class ViewControllerhome: UIViewController, UICollectionViewDelegate, UICollecti
         super.viewDidLoad()
         headerView.layer.cornerRadius = 16
         
-        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showAllStatsView))
+            seeAnalyticsButton.isUserInteractionEnabled = true
+            seeAnalyticsButton.addGestureRecognizer(tapGesture)
         // Do any additional setup after loading the view.
         if let athlete = userStats.first {
                userNameLabel.text = athlete.name
@@ -343,8 +345,12 @@ class ViewControllerhome: UIViewController, UICollectionViewDelegate, UICollecti
             matchesPlayedvsPointsScoredBarGraphView.addSubview(groupLabel)
         }
     }
-
-
+    @objc func showAllStatsView() {
+        let allStatsView = AllStatsViewstat() // Assuming this is a SwiftUI View
+        let hostingController = UIHostingController(rootView: allStatsView)
+        hostingController.modalPresentationStyle = .pageSheet
+        present(hostingController, animated: true, completion: nil)
+    }
 //    @objc func floatingButtonTapped() {
 //        print("Floating button tapped!")
 //    }
