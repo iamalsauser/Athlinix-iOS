@@ -1,0 +1,5 @@
+  let (pointsData, reboundsData, assistsToTurnoverData) = extractGraphData(stats: stats)
+    
+    drawLineGraph(in: scoringEfficiencyLineGraphView, dataPoints: pointsData)
+    drawLineGraph(in: reboundsIncreaseLinceGraphView, dataPoints: reboundsData)
+    drawLineGraph(in: assistsToTurnoverLineGraphView, dataPoints: assistsToTurnoverData)

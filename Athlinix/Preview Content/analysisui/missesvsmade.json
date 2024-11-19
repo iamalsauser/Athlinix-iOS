@@ -1,0 +1,30 @@
+
+[
+    {
+        "playerName": "John Doe",
+        "freethrowsmade": 25,
+        "freethrowsmissed": 10,
+        "twoptfgmade": 15,
+        "twoptfgmissed": 5,
+        "threeptfgmissed": 12,
+        "threeptfgmade": 8
+    },
+    {
+        "playerName": "John Doe",
+        "freethrowsmade": 25,
+        "freethrowsmissed": 10,
+        "twoptfgmade": 15,
+        "twoptfgmissed": 5,
+        "threeptfgmissed": 12,
+        "threeptfgmade": 8
+    },
+    {
+        "playerName": "John Doe",
+        "freethrowsmade": 25,
+        "freethrowsmissed": 10,
+        "twoptfgmade": 15,
+        "twoptfgmissed": 5,
+        "threeptfgmissed": 12,
+        "threeptfgmade": 8
+    }
+]

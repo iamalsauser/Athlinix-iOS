@@ -1,0 +1,72 @@
+[
+    {
+        "rebounds": 23,
+        "steals": 23,
+        "name": "Parth",
+        "assists": 23,
+        "id": "6A031339-5260-44FB-B68B-BC02D289CB84",
+        "matchDate": 752488298.866481,
+        "points": 12,
+        "blocks": 23
+    },
+    {
+        "rebounds": 2,
+        "steals": 2,
+        "name": "Parth",
+        "assists": 2,
+        "id": "6AFDDA44-3863-4E03-94EA-9829F2004C99",
+        "matchDate": 752488665.650892,
+        "points": 2,
+        "blocks": 2
+    },
+    {
+        "rebounds": 6,
+        "steals": 2,
+        "name": "Parth",
+        "assists": 2,
+        "id": "6AFDDA44-3863-4E03-94EA-9829F2004C92",
+        "matchDate": 752488665.650892,
+        "points": 2,
+        "blocks": 2
+    },
+    {
+        "rebounds": 32,
+        "steals": 3,
+        "name": "Parth",
+        "assists": 23,
+        "id": "6A031339-5260-44FB-B68B-BC02D289Cf 84",
+        "matchDate": 752488298.866481,
+        "points": 12,
+        "blocks": 23
+    },
+    {
+        "rebounds": 0,
+        "steals": 0,
+        "name": "Parth",
+        "assists": 0,
+        "id": "6A031339-5260-44FB-B68B-BC02D289Cf 84",
+        "matchDate": 752488298.866481,
+        "points": 0,
+        "blocks": 0
+    },{
+        "rebounds": 0,
+        "steals": 0,
+        "name": "Parth",
+        "assists": 0,
+        "id": "6A031339-5260-44FB-B68B-BC02D289Cf 84",
+        "matchDate": 752488298.866481,
+        "points": 0,
+        "blocks": 0
+    },{
+        "matchDate" : 753738654.690826,
+        "rebounds" : 100,
+        "points" : 100,
+        "name" : "Parth",
+        "id" : "ED1FDABB-BBF5-46B0-8F8D-7CC1B50E2625",
+        "steals" : 100,
+        "assists" : 100,
+        "blocks" : 100
+      },
+
+   
+]

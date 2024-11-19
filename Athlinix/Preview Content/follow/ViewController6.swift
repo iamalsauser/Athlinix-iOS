@@ -231,8 +231,8 @@ extension ViewController6: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension UIColor {
-    convenience init(hex: String) {
-        var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
+    convenience init(hex6: String) {
+        var hexSanitized = hex6.trimmingCharacters(in: .whitespacesAndNewlines)
         if hexSanitized.hasPrefix("#") {
             hexSanitized.remove(at: hexSanitized.startIndex)
         }

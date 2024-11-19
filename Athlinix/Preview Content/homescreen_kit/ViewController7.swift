@@ -346,7 +346,7 @@ class ViewControllerhome: UIViewController, UICollectionViewDelegate, UICollecti
         }
     }
     @objc func showAllStatsView() {
-        let allStatsView = AllStatsViewstat() // Assuming this is a SwiftUI View
+        let allStatsView = /*AllStatsViewstat()*/analysisuikit() // Assuming this is a SwiftUI View
         let hostingController = UIHostingController(rootView: allStatsView)
         hostingController.modalPresentationStyle = .pageSheet
         present(hostingController, animated: true, completion: nil)

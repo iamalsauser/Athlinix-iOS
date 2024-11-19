@@ -41,7 +41,7 @@ struct ContentView: View {
 
                         Spacer()
 
-                        NavigationLink(destination: AllStatsViewstat()) {
+                        NavigationLink(destination: /*AllStatsViewstat()*/analysisuikit()) {
                             Text("See All")
                                 .foregroundColor(.blue)
                                 .padding(.trailing)
@@ -100,13 +100,14 @@ struct ContentView: View {
             .tag("home")
             
             Explore_UIkit(/*selectedButton: $selectedTab*/)
+//            Explore(selectedButton: $selectedTab)
                 .tabItem {
                     Image(systemName: "globe")
                     Text("Explore")
                 }
                 .tag("explore")
             
-            ProfileStat(selectedButton: $selectedTab)
+            ProfileStat1(selectedButton: $selectedTab)
                 .tabItem {
                     Image(systemName: "person.fill")
                     Text("Profile")
