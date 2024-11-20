@@ -3,7 +3,7 @@ import SwiftUI
 struct Explore: View {
     @Binding var selectedButton: String
     @State private var searchText: String = ""
-    
+
     var body: some View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
@@ -24,7 +24,8 @@ struct Explore: View {
                 }
                 .padding(.top)
                 
-                InstagramFeedView()
+                // Pass searchText to InstagramFeedView
+                InstagramFeedView(searchText: searchText)
                 
                 Spacer()
             }

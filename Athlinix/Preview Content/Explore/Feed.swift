@@ -4,6 +4,8 @@ struct InstagramFeedView: View {
     @State private var likedPosts: Set<UUID> = []
     @State private var comments: [UUID: String] = [:]
     @State private var commentInput: String = ""
+    
+    var searchText: String // Add searchText property
 
     let posts: [Post] = [
         Post(user: User(name: "Lebron James", profileImage: "person.circle.fill"), images: ["feed1", "feed3"], likes: 120, caption: "Just scored the game-winning shot!", teamLogo: "lakers"),
@@ -12,12 +14,21 @@ struct InstagramFeedView: View {
         Post(user: User(name: "Nand Merja", profileImage: "person.circle.fill"), images: ["profile3"], likes: 64, caption: "Enjoying a victory celebration!", teamLogo: "warriors"),
         Post(user: User(name: "Parth Sinh", profileImage: "person.circle.fill"), images: ["feed3"], likes: 64, caption: "Practicing my free throws at the court.", teamLogo: "toronto"),
     ]
+    
+    // Filter posts based on searchText
+    var filteredPosts: [Post] {
+        if searchText.isEmpty {
+            return posts
+        } else {
+            return posts.filter { $0.user.name.localizedCaseInsensitiveContains(searchText) }
+        }
+    }
 
     var body: some View {
-        NavigationView { // Wrap in NavigationView
+        NavigationView {
             ScrollView {
                 VStack(spacing: 15) {
-                    ForEach(posts) { post in
+                    ForEach(filteredPosts) { post in
                         PostView(post: post, likedPosts: $likedPosts, comments: $comments, commentInput: $commentInput)
                     }
                 }
@@ -51,7 +62,6 @@ struct PostView: View {
     }
 }
 
-
 struct UserProfileView: View {
     let user: User
 
@@ -73,7 +83,6 @@ struct UserProfileView: View {
         .padding(.horizontal)
     }
 }
-
 
 struct PostImagesView: View {
     let images: [String]
@@ -102,7 +111,6 @@ struct PostImagesView: View {
         }
     }
 }
-
 
 struct LikeShareSection: View {
     let post: Post
@@ -143,7 +151,6 @@ struct LikeShareSection: View {
     }
 }
 
-
 struct CaptionView: View {
     let post: Post
 
@@ -163,7 +170,6 @@ struct CaptionView: View {
         .padding(.horizontal)
     }
 }
-
 
 struct CommentSection: View {
     let post: Post
@@ -194,7 +200,6 @@ struct CommentSection: View {
     }
 }
 
-
 struct User {
     let name: String
     let profileImage: String
@@ -209,9 +214,8 @@ struct Post: Identifiable {
     let teamLogo: String
 }
 
-
 struct InstagramFeedView_Previews: PreviewProvider {
     static var previews: some View {
-        InstagramFeedView()
+        InstagramFeedView(searchText: "")
     }
 }

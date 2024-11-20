@@ -29,11 +29,11 @@ class FeedCell: UITableViewCell {
         teamNameLabel.text = feed.teamName
         teamLogoImageView.image = feed.teamLogo
         locationLabel.text = feed.location
-        likeCountLabel.text = "\(feed.likeCount) likes"
+//        likeCountLabel.text = "\(feed.likeCount) likes"
         imageView1.image = feed.image1
         imageView2.image = feed.image2
         imageView3.image = feed.image3
-        updateLikeButtonAppearance()
+//        updateLikeButtonAppearance()
         
         // Apply rounded corners
         makeImagesRounded()
@@ -58,17 +58,17 @@ class FeedCell: UITableViewCell {
         imageView3.layer.masksToBounds = true
     }
     
-    @IBAction func likeButtonTapped(_ sender: UIButton) {
-        isLiked.toggle() // Toggle the liked state
-        updateLikeButtonAppearance() // Update the button's appearance
-    }
+//    @IBAction func likeButtonTapped(_ sender: UIButton) {
+//        isLiked.toggle() // Toggle the liked state
+//        updateLikeButtonAppearance() // Update the button's appearance
+//    }
 
     // Method to update the button's appearance
-    private func updateLikeButtonAppearance() {
-        if isLiked {
-            likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal) // Filled heart icon
-        } else {
-            likeButton.setImage(UIImage(systemName: "heart"), for: .normal) // Outline heart icon
-        }
-    }
+//    private func updateLikeButtonAppearance() {
+//        if isLiked {
+//            likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal) // Filled heart icon
+//        } else {
+//            likeButton.setImage(UIImage(systemName: "heart"), for: .normal) // Outline heart icon
+//        }
+//    }
 }

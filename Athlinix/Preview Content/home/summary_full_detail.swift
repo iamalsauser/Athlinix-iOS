@@ -5,12 +5,12 @@ struct TorapsStatsView: View {
         VStack {
             
             HStack {
-                Image(systemName: "chevron.left")
-                    .padding()
-                Spacer()
-                Text("Player wise stats")
-                    .font(.headline)
-                Spacer()
+//                Image(systemName: "chevron.left")
+//                    .padding()
+//                Spacer()
+//                Text("Player wise stats")
+//                    .font(.headline)
+//                Spacer()
             }
             .padding(.top, 20)
             
@@ -118,7 +118,7 @@ struct TorapsStatsView: View {
                 }
             }
             .listStyle(PlainListStyle())
-        }
+        }.navigationBarBackButtonHidden(false)
     }
 }
 

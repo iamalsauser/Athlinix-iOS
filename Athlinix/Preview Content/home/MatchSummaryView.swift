@@ -54,7 +54,7 @@ struct MatchSummaryViewFormat1: View {
             }
             .padding(.horizontal)
 
-            NavigationLink(destination: TorapsStatsView()) {
+            NavigationLink(destination: matchesui()) {
                 Text("Match Summary Details")
                     .font(.footnote)
                     .foregroundColor(.secondary)
@@ -85,7 +85,7 @@ struct TeamStatsView: View {
         .padding()
         .background(Color.primary.opacity(0.05))
         .cornerRadius(10)
-        .shadow(radius: 2)
+//        .shadow(radius: 2)
     }
 }
 
@@ -107,7 +107,7 @@ struct StatItem: View {
         .padding(10)
         .background(Color(UIColor.secondarySystemBackground))
         .cornerRadius(8)
-        .shadow(radius: 1)
+//        .shadow(radius: 1)
     }
 }
 

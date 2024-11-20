@@ -4,7 +4,7 @@ struct ProfileView: View {
     var body: some View {
         ZStack {
             // Blurred background using the same profile image
-            Image("profile") // Replace with your actual profile image
+            Image("profile1") // Replace with your actual profile image
                 .resizable()
                 .scaledToFill()
                 .frame(width: UIScreen.main.bounds.width, height: 250)
@@ -16,7 +16,7 @@ struct ProfileView: View {
                 
                 
                 // Circle profile image in the middle
-                Image("profile") // Replace with your actual profile image
+                Image("profile1") // Replace with your actual profile image
                     .resizable()
                     .scaledToFit()
                     .frame(width: 120, height: 120)

@@ -4,16 +4,16 @@ struct eStatsView: View {
     var body: some View {
         VStack {
             // Top Bar with centered "Stats" title
-            ZStack {
-                HStack {
-                    Image(systemName: "chevron.left")
-                        .padding()
-                    Spacer()
-                }
-                Text("Stats")
-                    .font(.headline)
-            }
-            .padding(.top, 20)
+            ZStack {}
+//                HStack {
+//                    Image(systemName: "chevron.left")
+//                        .padding()
+//                    Spacer()
+//                }
+//                Text("Stats")
+//                    .font(.headline)
+//            }
+//            .padding(.top, 20)
             
             // Score Header with 16-point padding
             HStack {
@@ -148,7 +148,7 @@ struct eStatsView: View {
             .padding(.horizontal, 16)
             
             Spacer()
-        }
+        }.navigationBarHidden(false)
     }
 }
 

@@ -5,7 +5,7 @@ struct ProfileInfoView: View {
         VStack {
             // Profile Image and Name with Verified Tick
             HStack(spacing: 5) {
-                Text("Parth Sinh")
+                Text("Rebecca Lombardi")
                     .font(.title)
                     .bold()
                     .padding(.leading)
