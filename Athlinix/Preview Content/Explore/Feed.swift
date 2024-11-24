@@ -13,6 +13,8 @@ struct InstagramFeedView: View {
         Post(user: User(name: "Dev Karan Singh", profileImage: "person.circle.fill"), images: ["feed7", "feed6"], likes: 200, caption: "Exploring new plays with my teammates.", teamLogo: "pistons"),
         Post(user: User(name: "Nand Merja", profileImage: "person.circle.fill"), images: ["profile3"], likes: 64, caption: "Enjoying a victory celebration!", teamLogo: "warriors"),
         Post(user: User(name: "Parth Sinh", profileImage: "person.circle.fill"), images: ["feed3"], likes: 64, caption: "Practicing my free throws at the court.", teamLogo: "toronto"),
+        Post(user: User(name: "Dev Karan Singh", profileImage: "person.circle.fill"), images: ["feed7", "feed6"], likes: 200, caption: "Exploring new plays with my teammates.", teamLogo: "pistons"),
+        Post(user: User(name: "Lebron James", profileImage: "person.circle.fill"), images: ["feed1", "feed3"], likes: 120, caption: "Just scored the game-winning shot!", teamLogo: "lakers"),
     ]
     
     // Filter posts based on searchText
