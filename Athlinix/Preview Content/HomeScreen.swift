@@ -70,8 +70,8 @@ struct ContentView: View {
                     .padding(.horizontal)
 
                     MatchSummaryViewFormat1(
-                        teamA: "Lakers",
-                        teamB: "Spurs",
+                        teamA: "Spurs",
+                        teamB: "lakers",
                         scoreA: 110,
                         scoreB: 105,
                         date: "Oct 13, 2024",
@@ -80,7 +80,7 @@ struct ContentView: View {
                     )
                     .padding(.horizontal)
 
-                    ImageViewer(imageName: "highlight", matchDetails: "Lakers vs BFI, Miami")
+                    ImageViewer(imageName: "highlight", matchDetails: "Lakers vs Cavs, Miami")
                         .padding(.horizontal)
                         .padding(.top, 10)
 
