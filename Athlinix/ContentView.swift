@@ -16,9 +16,9 @@ struct LogoScreen: View {
 //                NavigationLink(destination: HomeScreen(selectedButton: $selectedButton), isActive: $navigateToHome) {
 //                    EmptyView()
 //                }
-                NavigationLink(destination: homescreenstoryboard(), isActive: $navigateToHome) {
-                    EmptyView()
-                }
+//                NavigationLink(destination: homescreenstoryboard(), isActive: $navigateToHome) {
+//                    EmptyView()
+//                }
             }
             .navigationTitle("Welcome")
             .navigationBarHidden(true)
