@@ -13,9 +13,9 @@ struct LogoScreen: View {
                     .frame(width: 200, height: 150)
                 Spacer()
                 
-//                NavigationLink(destination: HomeScreen(selectedButton: $selectedButton), isActive: $navigateToHome) {
-//                    EmptyView()
-//                }
+                NavigationLink(destination: HomeScreen(selectedButton: $selectedButton), isActive: $navigateToHome) {
+                    EmptyView()
+                }
 //                NavigationLink(destination: homescreenstoryboard(), isActive: $navigateToHome) {
 //                    EmptyView()
 //                }
