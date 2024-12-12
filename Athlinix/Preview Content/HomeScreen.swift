@@ -41,7 +41,7 @@ struct ContentView: View {
 
                         Spacer()
 
-                        NavigationLink(destination: AllStatsViewstat()) {
+                        NavigationLink(destination: AllStatsViewstat()/*analysisuikit()*/) {
                             Text("See All")
                                 .foregroundColor(.blue)
                                 .padding(.trailing)
