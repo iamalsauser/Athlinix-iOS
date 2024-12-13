@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct LogoScreen: View {
-    @State private var selectedButton: String = "home"
+    @State private var navigateToLogin: Bool = false
     @State private var navigateToHome: Bool = false
 
     var body: some View {
@@ -13,12 +13,9 @@ struct LogoScreen: View {
                     .frame(width: 200, height: 150)
                 Spacer()
                 
-                NavigationLink(destination: HomeScreen(selectedButton: $selectedButton), isActive: $navigateToHome) {
+                NavigationLink(destination: ContentView_(), isActive: $navigateToHome) {
                     EmptyView()
                 }
-//                NavigationLink(destination: homescreenstoryboard(), isActive: $navigateToHome) {
-//                    EmptyView()
-//                }
             }
             .navigationTitle("Welcome")
             .navigationBarHidden(true)
