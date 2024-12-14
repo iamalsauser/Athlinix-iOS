@@ -54,6 +54,13 @@ struct ProfilePhotoScreen: View {
             ImagePicker(image: $selectedImage) // Assuming ImagePicker is your custom image picker
         }
     }
+    private func saveImage() {
+        if let image = selectedImage, let imageData = image.jpegData(compressionQuality: 0.8) {
+            UserManager.shared.updateCurrentUserData(key: "profilePhoto", value: imageData)
+        }
+        selectedButton = "RoleSelectionScreen"
+    }
+
 }
 
 struct ProfilePhoto_Previews: PreviewProvider {

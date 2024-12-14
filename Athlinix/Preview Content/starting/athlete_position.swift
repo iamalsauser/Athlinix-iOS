@@ -21,7 +21,7 @@ struct Athlete_position: View {
             .frame(maxHeight: 200) // Adjust the height to suit the wheel display
             .padding()
 
-            NavigationLink(destination: SkillLevelScreen(selectedButton: $selectedButton)) { // Pass the binding here
+            NavigationLink(destination: SkillLevelScreen(selectedButton: $selectedButton)) {
                 Text("Next")
                     .font(.headline)
                     .padding()
@@ -29,7 +29,11 @@ struct Athlete_position: View {
                     .background(Color(red: 253/255, green: 100/255, blue: 48/255))
                     .foregroundColor(.white)
                     .cornerRadius(10)
+                    .onTapGesture {
+                        UserManager.shared.updateCurrentUserData(key: "position", value: selectedSkillLevel)
+                    }
             }
+
             .padding()
 
             Spacer()

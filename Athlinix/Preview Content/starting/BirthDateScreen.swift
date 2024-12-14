@@ -17,7 +17,7 @@ struct BirthDateScreen: View {
                 .padding()
                 .frame(maxHeight: 200) // Adjust the height to suit the wheel display
 
-            NavigationLink(destination: LocationScreen(selectedButton: $selectedButton)) { // Pass the binding to LocationScreen
+            NavigationLink(destination: GenderScreen(selectedButton: $selectedButton)) { // Pass the binding to LocationScreen
                 Text("Next")
                     .font(.headline)
                     .padding()

@@ -57,7 +57,14 @@ struct PhoneNumberScreen: View {
         .padding(.leading) // Add some padding on the leading edge
         .padding(.bottom, 20) // Additional bottom padding for overall spacing
     }
+    private func savePhoneNumber() {
+        let fullPhoneNumber = "\(selectedCountry) \(phoneNumber)"
+        UserManager.shared.updateCurrentUserData(key: "phoneNumber", value: fullPhoneNumber)
+        selectedButton = "BirthDateScreen" // Navigate to next screen
+    }
 }
+
+
 
 struct Phone_Previews: PreviewProvider {
     @State static var dummyButton = "home"

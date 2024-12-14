@@ -33,6 +33,11 @@ struct GenderScreen: View {
         }
         .navigationTitle("Gender")
     }
+    private func saveGender() {
+        UserManager.shared.updateCurrentUserData(key: "gender", value: selectedGender)
+        selectedButton = "ProfilePhotoScreen"
+    }
+
 }
 
 #Preview {

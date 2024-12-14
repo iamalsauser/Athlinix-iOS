@@ -59,7 +59,6 @@ struct CreateAccountScreen: View {
     }
 
     private func createAccount() {
-        // Validate inputs
         guard !username.isEmpty, !password.isEmpty else {
             errorMessage = "Please fill in all fields."
             return
@@ -70,14 +69,34 @@ struct CreateAccountScreen: View {
         }
 
         // Check if the user already exists
-        if UserManager.shared.getUser(byEmail: username) != nil {
+        if UserManager.shared.getCompleteUser(byEmail: username) != nil {
             errorMessage = "This email is already registered."
             return
         }
 
-        // Save new user
-        let newUser = User_(email: username, password: password)
-        UserManager.shared.saveUser(newUser)
+        // Save new user with combined credentials and details
+        let basicUser = User_(email: username, password: password)
+        
+        // Gather additional details from different screens
+        let userDetails = UserDetails(
+            name: "",
+            age: 0,
+            height: 0.0,
+            weight: 0.0,
+            position: "",
+            skillLevel: "",
+            yearsPlayed: 0,
+            phoneNumber: nil,
+            birthDate: nil,
+            gender: nil,
+            profilePhoto: nil
+        )
+
+        // Combine basic user and additional details
+        let completeUser = CompleteUser(basicInfo: basicUser, additionalInfo: userDetails)
+
+        // Save complete user
+        UserManager.shared.saveCompleteUser(completeUser)
 
         // Navigate to the login screen
         selectedButton = "login"

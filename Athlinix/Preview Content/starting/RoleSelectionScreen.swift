@@ -18,6 +18,7 @@ struct RoleSelectionScreen: View {
                     .padding(.all, 10) // Padding between logo and title
             }
 
+            // Role Picker
             Picker("Role", selection: $selectedRole) {
                 Text("Coach").tag("Coach")
                 Text("Athlete").tag("Athlete")
@@ -25,6 +26,7 @@ struct RoleSelectionScreen: View {
             .pickerStyle(SegmentedPickerStyle())
             .padding()
 
+            // Navigation based on role
             if selectedRole == "Coach" {
                 NavigationLink(destination: coachexp(selectedButton: $selectedButton)) {
                     Text("Next")
@@ -36,6 +38,9 @@ struct RoleSelectionScreen: View {
                         .cornerRadius(10)
                 }
                 .padding()
+                .onTapGesture {
+                    saveRole(role: "Coach")
+                }
             } else if selectedRole == "Athlete" {
                 NavigationLink(destination: AthleteHeightScreen(selectedButton: $selectedButton)) {
                     Text("Next")
@@ -47,12 +52,20 @@ struct RoleSelectionScreen: View {
                         .cornerRadius(10)
                 }
                 .padding()
+                .onTapGesture {
+                    saveRole(role: "Athlete")
+                }
             }
 
             Spacer()
         }
         .navigationTitle("Role Selection")
         .padding(.horizontal) // Add horizontal padding to the entire screen
+    }
+    
+    /// Save the selected role to UserManager
+    private func saveRole(role: String) {
+        UserManager.shared.updateCurrentUserData(key: "role", value: role)
     }
 }
 

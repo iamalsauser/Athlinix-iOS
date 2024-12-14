@@ -60,14 +60,18 @@ struct LoginScreen: View {
     }
 
     private func login() {
-        if UserManager.shared.authenticateUser(email: email, password: password) {
-            if UserManager.shared.getUser(byEmail: email) != nil {
-                        selectedButton = "PhoneNumberScreen" // Navigate to PhoneNumberScreen
+        if let user = UserManager.shared.getCompleteUser(byEmail: email) {
+            if user.basicInfo.password == password {
+                if user.additionalInfo.phoneNumber != nil {
+                    selectedButton = "PhoneNumberScreen" // Navigate to PhoneNumberScreen
+                } else {
+                    selectedButton = "home" // Navigate to Home screen
+                }
             } else {
-                selectedButton = "home" // Navigate to Home screen
+                errorMessage = "Invalid password. Please try again."
             }
         } else {
-            errorMessage = "Invalid email or password. Please try again."
+            errorMessage = "User not found. Please check your email."
         }
     }
 }
