@@ -16,6 +16,9 @@ struct LogoScreen: View {
                 NavigationLink(destination: ContentView_(), isActive: $navigateToHome) {
                     EmptyView()
                 }
+//                NavigationLink(destination: AthleteApp(), isActive: $navigateToHome) {
+//                    EmptyView()
+//                }
             }
             .navigationTitle("Welcome")
             .navigationBarHidden(true)
