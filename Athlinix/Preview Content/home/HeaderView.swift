@@ -59,7 +59,7 @@ struct HeaderView: View {
             .padding(.horizontal)
             
             HStack {
-                Image("profile")
+                Image("parth")
                     .resizable()
                     .frame(width: 80, height: 80)
                     .clipShape(Circle())

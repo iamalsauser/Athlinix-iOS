@@ -62,7 +62,7 @@ struct LoginScreen: View {
     private func login() {
         if let user = UserManager.shared.getCompleteUser(byEmail: email) {
             if user.basicInfo.password == password {
-                selectedButton = "home" // Direct navigation to HomeScreen
+                selectedButton = "home" // Navigate directly to HomeScreen
             } else {
                 errorMessage = "Invalid password. Please try again."
             }
@@ -70,6 +70,7 @@ struct LoginScreen: View {
             errorMessage = "User not found. Please check your email."
         }
     }
+
 }
 
 struct LoginScreen_Previews: PreviewProvider {

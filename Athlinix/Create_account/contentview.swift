@@ -15,8 +15,8 @@ struct ContentView_: View {
             LoginScreen(selectedButton: $selectedButton)
         } else if selectedButton == "createAccount" {
             CreateAccountScreen(selectedButton: $selectedButton)
-        }else if selectedButton == "PhoneNumberScreen" {
-            PhoneNumberScreen(selectedButton: $selectedButton) // Navigate to PhoneNumberScreen
+        }else if selectedButton == "home" {
+            HomeScreen(selectedButton: $selectedButton) // Navigate to PhoneNumberScreen
         }
     }
 }
