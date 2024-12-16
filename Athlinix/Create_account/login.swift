@@ -4,7 +4,7 @@ struct LoginScreen: View {
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var errorMessage: String?
-    @Binding var selectedButton: String // To navigate after login or signup
+    @Binding var selectedButton: String // Binding for navigation to different views
 
     var body: some View {
         VStack {
@@ -62,11 +62,7 @@ struct LoginScreen: View {
     private func login() {
         if let user = UserManager.shared.getCompleteUser(byEmail: email) {
             if user.basicInfo.password == password {
-                if user.additionalInfo.phoneNumber != nil {
-                    selectedButton = "PhoneNumberScreen" // Navigate to PhoneNumberScreen
-                } else {
-                    selectedButton = "home" // Navigate to Home screen
-                }
+                selectedButton = "home" // Direct navigation to HomeScreen
             } else {
                 errorMessage = "Invalid password. Please try again."
             }

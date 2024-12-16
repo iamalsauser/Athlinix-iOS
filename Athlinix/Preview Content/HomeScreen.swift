@@ -2,6 +2,7 @@ import SwiftUI
 
 struct HomeScreen: View {
     @Binding var selectedButton: String
+
     @State private var isHeaderTapped = false  // State to track if the header was tapped
 
     var body: some View {
@@ -17,6 +18,7 @@ struct HomeScreen: View {
                     }
             }
         }
+        .navigationViewStyle(StackNavigationViewStyle()) // Ensures NavigationView works with ZStack
         .navigationBarHidden(true)
         .onAppear {
             selectedButton = "home"
@@ -71,7 +73,7 @@ struct ContentView: View {
 
                     MatchSummaryViewFormat1(
                         teamA: "Spurs",
-                        teamB: "lakers",
+                        teamB: "Lakers",
                         scoreA: 110,
                         scoreB: 105,
                         date: "Oct 13, 2024",
@@ -99,7 +101,6 @@ struct ContentView: View {
             }
             .tag("home")
             
-//            Explore_UIkit(/*selectedButton: $selectedTab*/)
             Explore(selectedButton: $selectedTab)
                 .tabItem {
                     Image(systemName: "globe")
@@ -118,21 +119,10 @@ struct ContentView: View {
     }
 }
 
-struct HeaderSheetView: View {
-    var body: some View {
-        VStack {
-            Text("This is a header sheet")
-                .font(.largeTitle)
-                .padding()
-            Button("Dismiss") {
-                // You can dismiss the sheet programmatically if needed
-            }
-        }
-    }
-}
-
 struct HomeScreen_Previews: PreviewProvider {
+    @State static var dummyButton: String = "home"
+
     static var previews: some View {
-        HomeScreen(selectedButton: .constant("home"))
+        HomeScreen(selectedButton: $dummyButton)
     }
 }
