@@ -39,7 +39,7 @@ struct LoginScreen: View {
                     .font(.headline)
                     .padding()
                     .frame(maxWidth: .infinity)
-                    .background(Color.blue)
+                    .background(Color(hex: "fd6430"))
                     .foregroundColor(.white)
                     .cornerRadius(10)
                     .padding(.horizontal)
@@ -78,5 +78,21 @@ struct LoginScreen_Previews: PreviewProvider {
 
     static var previews: some View {
         LoginScreen(selectedButton: $dummyButton)
+    }
+}
+
+extension Color {
+    /// Helper initializer to use hex color codes.
+    init(hex0: String) {
+        let scanner = Scanner(string: hex0)
+        _ = scanner.scanString("#") // Ignore the `#` if present
+        var rgb: UInt64 = 0
+        scanner.scanHexInt64(&rgb)
+        
+        let r = Double((rgb >> 16) & 0xFF) / 255.0
+        let g = Double((rgb >> 8) & 0xFF) / 255.0
+        let b = Double(rgb & 0xFF) / 255.0
+        
+        self.init(red: r, green: g, blue: b)
     }
 }
