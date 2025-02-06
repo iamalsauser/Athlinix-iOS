@@ -5,8 +5,7 @@ struct StatsAddView: View {
     @ObservedObject var viewModel: ViewModel
     @Environment(\.dismiss) var dismiss
     
-    // Using string values for input.
-    // Note: We removed fields for TP, FGM, and FGA.
+    
     @State private var tpm = ""
     @State private var threepm = ""
     @State private var ftm = ""

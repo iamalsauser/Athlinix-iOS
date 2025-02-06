@@ -1,18 +1,15 @@
 import SwiftUI
 
-struct StatsAddView: View {
-    
+struct UpdateStatsView: View {
     @ObservedObject var viewModel: ViewModel
-    @Environment(\.dismiss) var dismiss
+    let stats: Statistics
     
-    // Using string values for input.
-    // Note: We removed fields for TP, FGM, and FGA.
+    
     @State private var tpm = ""
     @State private var threepm = ""
     @State private var ftm = ""
     @State private var tpa = ""
     @State private var threepa = ""
-    
     @State private var fta = ""
     @State private var oreb = ""
     @State private var dreb = ""
@@ -22,10 +19,12 @@ struct StatsAddView: View {
     @State private var pf = ""
     @State private var blk = ""
     
+    @Environment(\.dismiss) var dismiss
+    
     var body: some View {
         NavigationStack {
             Form {
-                Section(header: Text("Shooting Stats")) {
+                Section(header: Text("Update Shooting Stats")) {
                     TextField("TPM (2-point Made)", text: $tpm)
                         .keyboardType(.numberPad)
                     TextField("3PM (3-point Made)", text: $threepm)
@@ -57,11 +56,29 @@ struct StatsAddView: View {
                         .keyboardType(.numberPad)
                 }
             }
-            .navigationTitle("Add Stats")
+            .navigationTitle("Update Stats")
+            .onAppear {
+                
+                tpm = "\(stats.tpm)"
+                threepm = "\(stats.threepm)"
+                ftm = "\(stats.ftm)"
+                tpa = "\(stats.tpa)"
+                threepa = "\(stats.threepa)"
+                fta = "\(stats.fta)"
+                oreb = "\(stats.oreb)"
+                dreb = "\(stats.dreb)"
+                ast = "\(stats.ast)"
+//                ppg = "\(stats.ppg)"
+                toStat = "\(stats.to)"
+                stl = "\(stats.stl)"
+                pf = "\(stats.pf)"
+                blk = "\(stats.blk)"
+            }
             .toolbar {
                 ToolbarItem {
-                    Button("Send") {
+                    Button("Update") {
                         Task {
+                            
                             let update = ViewModel.StatisticsUpdate(
                                 tpm: Int(tpm),
                                 threepm: Int(threepm),
@@ -91,8 +108,30 @@ struct StatsAddView: View {
     }
 }
 
-struct StatsAddView_Previews: PreviewProvider {
+struct UpdateStatsView_Previews: PreviewProvider {
     static var previews: some View {
-        StatsAddView(viewModel: ViewModel())
+        let dummyStats = Statistics(
+            id: 1,
+            createdAt: Date(),
+            userID: UUID(),
+            tp: 10,
+            fgm: 5,
+            fga: 12,
+            tpm: 2,
+            tpa: 7,
+            threepm: 3,
+            threepa: 5,
+            ftm: 5,
+            fta: 6,
+            oreb: 1,
+            dreb: 4,
+            ast: 3,
+            to: 2,
+            stl: 1,
+            pf: 2,
+            blk: 0,
+            isComplete: false
+        )
+        UpdateStatsView(viewModel: ViewModel(), stats: dummyStats)
     }
 }

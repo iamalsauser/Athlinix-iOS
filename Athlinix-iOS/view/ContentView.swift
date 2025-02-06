@@ -36,7 +36,7 @@ struct ContentView: View {
                         statRow(title: "TSP", value: "\(stats.tsp?.rounded(toPlaces: 1) ?? 0)%")
                         statRow(title: "TOP", value: "\(stats.top?.rounded(toPlaces: 1) ?? 0)%")
                         
-                        // Completion Status
+                        
                         HStack {
                             Text("Complete")
                             Spacer()
@@ -103,7 +103,7 @@ struct ContentView: View {
         }
     }
     
-    // Helper function to display percentage stats
+    
     @ViewBuilder
     func statRow(title: String, value: String) -> some View {
         HStack {
@@ -114,7 +114,7 @@ struct ContentView: View {
     }
 }
 
-// Extension to round Float values to a specific number of decimal places
+
 extension Float {
     func rounded(toPlaces places: Int) -> Float {
         let divisor = pow(10.0, Float(places))

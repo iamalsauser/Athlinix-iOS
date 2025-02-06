@@ -4,7 +4,7 @@ struct OnboardingView: View {
     @ObservedObject var viewModel: ViewModel
     @Environment(\.dismiss) var dismiss
     
-    // Onboarding State Variables
+    
     @State private var playerPosition = ""
     @State private var height = ""
     @State private var weight = ""
@@ -41,11 +41,11 @@ struct OnboardingView: View {
     }
     
     private func saveOnboardingData() async {
-        // Convert height and weight to Double
+        
         let heightValue = Double(height) ?? 0.0
         let weightValue = Double(weight) ?? 0.0
         
-        // Update the statistics record with onboarding data
+        
         if var currentStats = viewModel.statistics {
             currentStats.playerPosition = playerPosition
             currentStats.height = heightValue
@@ -54,7 +54,7 @@ struct OnboardingView: View {
             currentStats.gender = gender
             currentStats.location = location
             
-            // Save to the database
+            
             do {
                 let updatedStats: [Statistics] = try await viewModel.supabase
                     .from(Table.statistics)
